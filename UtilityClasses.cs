@@ -46,6 +46,14 @@ namespace VisualMove
             set;
         }
 
+        public string ImageFolder
+        {
+            get
+            {
+                return QRCode.QRCode.GetHashCode().ToString();
+            }
+        }
+
         public Collection<PhotoWrapper> Photos
         {
             get;
