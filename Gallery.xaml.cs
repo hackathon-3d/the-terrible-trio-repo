@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Windows.Foundation;
@@ -33,6 +34,38 @@ namespace VisualMove
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CameraButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public Camera Camera
+        {
+            get;
+            set;
+        }
+
+        public Box CurrentBox 
+        {
+            get;
+            set;
         }
     }
 }
