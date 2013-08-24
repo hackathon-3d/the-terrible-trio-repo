@@ -8,8 +8,10 @@
     mc:Ignorable="d">
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="Auto"/>
+            <RowDefinition 
+                Height="*" />
+            <RowDefinition 
+                Height="Auto" />
         </Grid.RowDefinitions>
         <CaptureElement x:Name="oMediaCapture"   />
         <Grid Grid.Row="1">

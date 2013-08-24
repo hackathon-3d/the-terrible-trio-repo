@@ -105,6 +105,22 @@ namespace VisualMove
     public class PhotoWrapper
     {
         public PhotoWrapper()
-        { }
+        {
+            Id = Guid.NewGuid();
+        }
+
+        public String FileName
+        {
+            get
+            {
+                return String.Format("{0}.jpg", Id.ToString());
+            }
+        }
+
+        public Guid Id
+        {
+            get;
+            private set;
+        }
     }
 }
