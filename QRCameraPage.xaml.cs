@@ -40,6 +40,10 @@ namespace VisualMove
         }
         #endregion
 
+        #region Data Members
+        private bool m_bTakePictures;
+        #endregion
+
         #region Constructors
         public QRCameraPage()
         {
@@ -109,7 +113,8 @@ namespace VisualMove
             await oMediaCapture.Source.StartPreviewAsync();
 
             Result oQR = null;
-            while (oQR == null)
+            m_bTakePictures = true;
+            while (m_bTakePictures && oQR == null)
             {
                 InMemoryRandomAccessStream oPhotoStream = new InMemoryRandomAccessStream();
                 await oMediaCapture.Source.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(),
@@ -167,6 +172,12 @@ namespace VisualMove
             }
         }
 
+        protected override async void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            await oMediaCapture.Source.StopPreviewAsync();
+            m_bTakePictures = false;
+            base.OnNavigatedFrom(e);
+        }
         #endregion
 
         #region Event Handlers
