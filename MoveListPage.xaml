@@ -41,6 +41,7 @@
                 Source="/Assets/TrashCanWhite.png" />
         </Button>
         <StackPanel
+            VerticalAlignment="Stretch"
             Grid.Row="1"
             Grid.ColumnSpan="2">
             <ScrollViewer
@@ -48,7 +49,7 @@
                 HorizontalScrollBarVisibility="Hidden"
                 VerticalScrollBarVisibility="Visible">
                 <ListView
-                    Height="300"
+                    VerticalAlignment="Stretch"
                     Name="m_oMoveList" FontSize="48" SelectionChanged="m_oMoveList_SelectionChanged"/>
             </ScrollViewer>
         </StackPanel>
