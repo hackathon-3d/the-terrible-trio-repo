@@ -44,7 +44,7 @@
             VerticalAlignment="Stretch"
             Grid.Row="1"
             Grid.ColumnSpan="2">
-            <Border Width="720" Height="480" Margin="20" Padding="5" BorderThickness="5" BorderBrush="White" CornerRadius="20" Background="DarkRed">
+            <Border Width="720" Opacity="0.75" Height="480" Margin="20" Padding="5" BorderThickness="5" BorderBrush="White" CornerRadius="20" Background="SkyBlue">
                 <ScrollViewer
                     Width="750"
                     Height="550"
@@ -54,11 +54,9 @@
                         Name="m_oMoveList" FontSize="48" SelectionChanged="m_oMoveList_SelectionChanged">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderThickness="2" BorderBrush="White" CornerRadius="5" Width="720">
-                                    <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Stretch">
-                                        <TextBlock FontSize="28" Text="{Binding Path=Name}" HorizontalAlignment="Stretch"></TextBlock>
-                                    </StackPanel>
-                                </Border>
+                                <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                    <TextBlock FontSize="28" Text="{Binding Path=Name}" HorizontalAlignment="Stretch"></TextBlock>
+                                </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
