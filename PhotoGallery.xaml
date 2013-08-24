@@ -25,6 +25,10 @@
             <ColumnDefinition
                 Width="Auto" />
         </Grid.ColumnDefinitions>
+        <Image
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
+            x:Name="ImageDisplay" />
         <Button 
             Grid.Row="0"
             Grid.Column="0"

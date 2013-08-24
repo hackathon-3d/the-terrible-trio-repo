@@ -1,5 +1,11 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Windows.Storage;
+using Windows.Storage.Streams;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 namespace VisualMove
@@ -22,6 +28,8 @@ namespace VisualMove
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            // load photos
+            LoadPhotos();
         }
 
         #endregion
@@ -53,12 +61,26 @@ namespace VisualMove
 
         #endregion
 
-        /*protected async void DisplayMessageBox(string sMessage, string sTitle)
+        private async void LoadPhotos()
         {
-            var oMessageDialog = new Windows.UI.Popups.MessageDialog(sMessage, sTitle);
-            oMessageDialog.DefaultCommandIndex = 1;
-            await oMessageDialog.ShowAsync();
-        }*/
+            // get photos from current box
+            List<PhotoWrapper> oPhotos = new List<PhotoWrapper>(Move.CurrentBox.Photos);
+            foreach (PhotoWrapper oPhoto in oPhotos)
+            {
+                StorageFile oPhotoFile = await ApplicationData.Current.LocalFolder.GetFileAsync(oPhoto.FileName);
+                using (IRandomAccessStream oPhotoStream = await oPhotoFile.OpenReadAsync())
+                {
+                    WriteableBitmap oBitmap = new WriteableBitmap(1, 1);
+                    oPhotoStream.Seek(0);
+                    oBitmap.SetSource(oPhotoStream);
+                    oBitmap = new WriteableBitmap(oBitmap.PixelWidth, oBitmap.PixelHeight);
+                    oPhotoStream.Seek(0);
+                    oBitmap.SetSource(oPhotoStream);
+
+                    ImageDisplay.Source = oBitmap;
+                }
+            }
+        }
 
         #region Properties
 
