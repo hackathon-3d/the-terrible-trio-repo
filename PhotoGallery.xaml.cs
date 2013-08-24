@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using Windows.Storage;
 using Windows.Storage.Streams;
@@ -39,17 +40,11 @@ namespace VisualMove
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             // May want a messagebox here
-            CurrentBox.Photos.Clear();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             // Open Window
-            if (CurrentBox.Photos.Count == 0)
-            {
-                Move.Boxes.Remove(CurrentBox);
-                Move.CurrentBox = null;
-            }
             this.Frame.GoBack();
         }
 
@@ -68,33 +63,36 @@ namespace VisualMove
 
         private async void LoadPhotos()
         {
-            // get photos from current box
-            List<PhotoWrapper> oPhotos = new List<PhotoWrapper>(Move.CurrentBox.Photos);
-            foreach (PhotoWrapper oPhoto in oPhotos)
-            {
-                StorageFile oPhotoFile = await ApplicationData.Current.LocalFolder.GetFileAsync(oPhoto.FileName);
-                using (IRandomAccessStream oPhotoStream = await oPhotoFile.OpenReadAsync())
-                {
-                    WriteableBitmap oBitmap = new WriteableBitmap(1, 1);
-                    oPhotoStream.Seek(0);
-                    oBitmap.SetSource(oPhotoStream);
-                    oBitmap = new WriteableBitmap(oBitmap.PixelWidth, oBitmap.PixelHeight);
-                    oPhotoStream.Seek(0);
-                    oBitmap.SetSource(oPhotoStream);
+            // clear existing photos
+            m_oFlipView.Items.Clear();
+            //Photos = new ObservableCollection<WriteableBitmap>();
 
-                    ImageDisplay.Source = oBitmap;
+            // get box folder
+            Box oCurrentBox = Move.CurrentBox;
+            if (oCurrentBox != null)
+            {
+                StorageFolder oBoxFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(Move.CurrentBox.ImageFolder);
+                IReadOnlyList<StorageFile> oPhotos = await oBoxFolder.GetFilesAsync();
+
+                // iterate through folder and load each photo
+                foreach (StorageFile oPhoto in oPhotos)
+                {
+                    using (IRandomAccessStream oPhotoStream = await oPhoto.OpenReadAsync())
+                    {
+                        WriteableBitmap oBitmap = new WriteableBitmap(1, 1);
+                        oPhotoStream.Seek(0);
+                        oBitmap.SetSource(oPhotoStream);
+                        oBitmap = new WriteableBitmap(oBitmap.PixelWidth, oBitmap.PixelHeight);
+                        oPhotoStream.Seek(0);
+                        oBitmap.SetSource(oPhotoStream);
+
+                        // add photo
+                        //Photos.Add(oBitmap);
+                        m_oFlipView.Items.Add(oBitmap);
+                    }
                 }
             }
+
         }
-
-        #region Properties
-
-        public Box CurrentBox
-        {
-            get;
-            set;
-        }
-
-        #endregion
     }
 }

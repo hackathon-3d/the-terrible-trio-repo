@@ -151,6 +151,7 @@
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\TrashCanBlack.png" />
     <Content Include="Assets\TrashCanWhite.png" />
+    <Content Include="Assets\VisualMoveLogoSmall.png" />
     <Page Include="PhotoCameraPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -41,15 +41,9 @@ namespace VisualMove
 
     public class Box
     {
-        public Box()
-        {
-            Photos = new Collection<PhotoWrapper>();
-        }
-
         public Box(QRCodeWrapper oQRCode)
         {
             QRCode = oQRCode;
-            Photos = new Collection<PhotoWrapper>();
         }
 
         public QRCodeWrapper QRCode
@@ -64,47 +58,6 @@ namespace VisualMove
             {
                 return QRCode.QRCode;
             }
-        }
-
-        public Collection<PhotoWrapper> Photos
-        {
-            get;
-            set;
-        }
-
-        // May not be used
-        public PhotoWrapper Scroll(bool bForward)
-        {
-            if(bForward == true)
-            {
-                if (Photos.IndexOf(CurrentPhoto) + 1 < Photos.Count)
-                {
-                    CurrentPhoto = Photos[Photos.IndexOf(CurrentPhoto) + 1];
-                }
-                else
-                {
-                    CurrentPhoto = Photos[0];
-                }
-            }
-            else
-            {
-                if (Photos.IndexOf(CurrentPhoto) - 1 >= 0)
-                {
-                    CurrentPhoto = Photos[Photos.IndexOf(CurrentPhoto) - 1];
-                }
-                else
-                {
-                    CurrentPhoto = Photos[Photos.Count - 1];
-                }
-            }
-            return CurrentPhoto;
-        }
-
-        // May not be used
-        public PhotoWrapper CurrentPhoto
-        {
-            get;
-            set;
         }
 
         public override bool Equals(object obj)
@@ -135,6 +88,13 @@ namespace VisualMove
 
         public static bool operator!=(Box oBox1, Box oBox2)
         {
+            if ((object)oBox1 == null)
+            {
+                if ((object)oBox2 == null)
+                    return false;
+                return true;
+            }
+
             return !oBox1.Equals(oBox2);
         }
     }
@@ -190,28 +150,6 @@ namespace VisualMove
         public static bool operator!=(QRCodeWrapper oQR1, QRCodeWrapper oQR2)
         {
             return !(oQR1 == oQR2);
-        }
-    }
-
-    public class PhotoWrapper
-    {
-        public PhotoWrapper()
-        {
-            Id = Guid.NewGuid();
-        }
-
-        public String FileName
-        {
-            get
-            {
-                return String.Format("{0}.jpg", Id.ToString());
-            }
-        }
-
-        public Guid Id
-        {
-            get;
-            private set;
         }
     }
 }

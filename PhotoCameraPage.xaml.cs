@@ -78,15 +78,14 @@ namespace VisualMove
         #endregion
 
         #region Event Handlers
+
         private async void CameraButton_Click(object sender, RoutedEventArgs e)
         {
             // store photo
-            PhotoWrapper oPhoto = new PhotoWrapper();
-            StorageFile oFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(oPhoto.FileName, CreationCollisionOption.ReplaceExisting);
-            await oMediaCapture.Source.CapturePhotoToStorageFileAsync(ImageEncodingProperties.CreateJpeg(), oFile);
-
-            // add photo to box
-            Move.CurrentBox.Photos.Add(oPhoto);
+            String sFileName = String.Format("{0}.jpg", Guid.NewGuid().ToString());
+            StorageFolder oBoxFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(Move.CurrentBox.ImageFolder);
+            StorageFile oPhotoFile = await oBoxFolder.CreateFileAsync(sFileName, CreationCollisionOption.ReplaceExisting);
+            await oMediaCapture.Source.CapturePhotoToStorageFileAsync(ImageEncodingProperties.CreateJpeg(), oPhotoFile);
         }
 
         private void GalleryButton_Click(object sender, RoutedEventArgs e)
