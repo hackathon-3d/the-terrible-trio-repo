@@ -34,7 +34,7 @@ namespace VisualMove
 
             foreach (StorageFolder oFolder in oFolders)
             {
-                Boxes.Add(new Box(new QRCodeWrapper(oFolder.Name)));
+                Boxes.Add(new Box(new QRCodeWrapper(oFolder)));
             }
         }
     }
@@ -120,11 +120,34 @@ namespace VisualMove
         {
             return QRCode.GetHashCode();
         }
+
+        public static bool operator==(Box oBox1, Box oBox2)
+        {
+            if ((object)oBox1 == null)
+            {
+                if ((object)oBox2 == null)
+                    return true;
+                return false;
+            }
+
+            return oBox1.Equals(oBox2);
+        }
+
+        public static bool operator!=(Box oBox1, Box oBox2)
+        {
+            return !oBox1.Equals(oBox2);
+        }
     }
 
     public class QRCodeWrapper
     {
         private int m_nCodeHash;
+
+        public QRCodeWrapper(StorageFolder oStorageFolder)
+        {
+            QRCode = oStorageFolder.Name;
+            m_nCodeHash = int.Parse(QRCode);
+        }
 
         public QRCodeWrapper(string sQRCode)
         {
@@ -150,6 +173,23 @@ namespace VisualMove
         public override int GetHashCode()
         {
             return m_nCodeHash;
+        }
+
+        public static bool operator==(QRCodeWrapper oQR1, QRCodeWrapper oQR2)
+        {
+            if ((object)oQR1 == null)
+            {
+                if ((object)oQR2 == null)
+                    return true;
+                return false;
+            }
+            
+            return oQR1.Equals(oQR2);
+        }
+
+        public static bool operator!=(QRCodeWrapper oQR1, QRCodeWrapper oQR2)
+        {
+            return !(oQR1 == oQR2);
         }
     }
 
