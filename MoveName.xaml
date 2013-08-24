@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Border Padding="5" BorderThickness="5" Height="135" Width="435" BorderBrush="White" CornerRadius="20" Background="DarkRed">
-        <Grid Background="DarkRed">
+    <Border Padding="5" BorderThickness="5" Height="135" Width="435" BorderBrush="White" CornerRadius="20" Background="SkyBlue">
+        <Grid Background="SkyBlue">
             <StackPanel>
                 <TextBlock Margin="10,0,10,0" Style="{StaticResource TitleTextStyle}">Enter new move name:</TextBlock>
                 <TextBox Margin="10,10,10,5" Name="m_oMoveName" Text=""/>
