@@ -47,7 +47,7 @@ namespace VisualMove
             if (m_oImageToFileMapping != null)
             {
                 foreach (StorageFile oPhoto in m_oImageToFileMapping.Values)
-        {
+                {
                     await oPhoto.DeleteAsync();
                 }
             }
@@ -115,7 +115,6 @@ namespace VisualMove
                     }
                 }
             }
-
         }
     }
 }
