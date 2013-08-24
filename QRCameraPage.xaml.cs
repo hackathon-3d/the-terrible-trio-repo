@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Windows.ApplicationModel.Activation;
 using Windows.Devices.Enumeration;
 using Windows.Foundation;
@@ -13,6 +12,7 @@ using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Storage.Streams;
 using Windows.System.Threading;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -21,7 +21,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-
+using Windows.UI.Xaml.Shapes;
 using ZXing;
 using ZXing.QrCode;
 
@@ -82,6 +82,8 @@ namespace VisualMove
 
             // resolution variables
             int iMaxResolution = 0;
+            int iHeight = 0;
+            int iWidth = 0;
             int iSelectedIndex = 0;
             IReadOnlyList<IMediaEncodingProperties> oAvailableResolutions = oCamera.VideoDeviceController.GetAvailableMediaStreamProperties(MediaStreamType.Photo);
 
@@ -94,6 +96,8 @@ namespace VisualMove
                 VideoEncodingProperties oProperties = (VideoEncodingProperties)oAvailableResolutions[i];
                 if (oProperties.Width * oProperties.Height > iMaxResolution)
                 {
+                    iHeight = (int)oProperties.Height;
+                    iWidth = (int)oProperties.Width;
                     iMaxResolution = (int)oProperties.Width;
                     iSelectedIndex = i;
                 }
@@ -129,23 +133,57 @@ namespace VisualMove
 
             if (oQR != null)
             {
-                Message = string.Format("Found QR code {0}", oQR.ToString());
+                // show message
+                Message = string.Format("Found QR code!", oQR.ToString());
+
+                // highlight qr area
+                RectangleGeometry oGeometry = new RectangleGeometry();
+                List<ResultPoint> oPoints = new List<ResultPoint>(oQR.ResultPoints);
+
+                // generate polygon
+                Polygon oSegment = new Polygon();
+                oSegment.Stroke = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
+                oSegment.Fill = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
+                PointCollection oNewPoints = new PointCollection();
+                foreach (ResultPoint oPoint in oPoints)
+                {
+                    oNewPoints.Add(DrawingCanvas.RenderTransform.TransformPoint(new Point(oPoint.X, oPoint.Y)));
+                }
+                oSegment.Points = oNewPoints;
+
+                // set drawing canvas size
+                DrawingCanvas.Width = iWidth;
+                DrawingCanvas.Height = iHeight;
+
+                // add polygon to canvas
+                DrawingCanvas.Children.Add(oSegment);
+
+                // find box
                 await MoveList.CurrentMove.FindBox(new QRCodeWrapper(oQR.ToString()));
-                this.Frame.Navigate(typeof(PhotoGallery), null);
+
+                // start transition timer
+                DispatcherTimer oTransitionTimer = new DispatcherTimer();
+                oTransitionTimer.Interval = new TimeSpan(0, 0, TRANSITION_TIMER_INTERVAL);
+                oTransitionTimer.Tick += oTransitionTimer_Tick;
+                oTransitionTimer.Start();
             }
         }
 
         #endregion
 
         #region Event Handlers
+
         private void CameraButton_Click(object sender, RoutedEventArgs e)
         {
             
         }
 
-        void oRefreshTimer_Tick(object sender, object e)
+        void oTransitionTimer_Tick(object sender, object e)
         {
             Message = String.Empty;
+            DispatcherTimer oTransitionTimer = (DispatcherTimer)sender;
+            oTransitionTimer.Stop();
+            this.Frame.Navigate(typeof(PhotoGallery), null);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -180,7 +218,7 @@ namespace VisualMove
 
         #region Constants
 
-        private const int REFRESH_TIMER_INTERVAL = 5;
+        private const int TRANSITION_TIMER_INTERVAL = 3;
         private const string QRCodeText = "Snap a Box QR Code!";
         private const string GalleryText = "Snap a pic for the Gallery!";
         private string m_sMode = "";

@@ -44,7 +44,7 @@
             Grid.Row="0"
             Grid.Column="0"
             Height="80"
-            Margin="16"
+            Margin="32"
             x:Name="BackButton" 
             Style="{StaticResource ButtonStyle}"
             Click="BackButton_Click" >
@@ -55,7 +55,7 @@
             Grid.Row="0"
             Grid.Column="2"
             Height="80"
-            Margin="16"
+            Margin="32"
             x:Name="CameraButton"
             Click="CameraButton_Click" 
             Style="{StaticResource ButtonStyle}">
@@ -66,7 +66,7 @@
             Grid.Row="3"
             Grid.Column="0"
             Height="96"
-            Margin="16"
+            Margin="32"
             x:Name="DeleteButton"
             Click="DeleteButton_Click" 
             Style="{StaticResource ButtonStyle}">
@@ -80,7 +80,7 @@
             Style="{StaticResource ButtonStyle}"
             Click="ClearButton_Click"
             Height="96"
-            Margin="16">
+            Margin="32">
             <Image
                 Source="/Assets/ExplosionIconWhite.png" />
         </Button>

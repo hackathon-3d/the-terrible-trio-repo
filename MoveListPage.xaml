@@ -21,6 +21,7 @@
         <Button
             Name="AddMove"
             Height="80"
+            Margin="32"
             Style="{StaticResource ButtonStyle}"
             HorizontalAlignment="Right"
             Click="AddMoveButton_Click">
@@ -32,6 +33,7 @@
             Grid.Column="0"
             Name="DeleteMove" 
             Height="80"
+            Margin="32"
             Style="{StaticResource ButtonStyle}"
             HorizontalAlignment="Left"
             Click="DeleteMoveButton_Click">
