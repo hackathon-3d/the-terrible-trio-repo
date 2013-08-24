@@ -9,9 +9,29 @@ using Windows.Storage;
 
 namespace VisualMove
 {
-    public static class Move
+    public static class MoveList
     {
-        public static async Task<Box> FindBox(QRCodeWrapper oQRCode)
+        static MoveList()
+        {
+            MoveListCollection = new Collection<Move>();
+        }
+
+        public static Collection<Move> MoveListCollection
+        {
+            get;
+            set;
+        }
+
+        public static Move CurrentMove
+        {
+            get;
+            set;
+        }
+    }
+
+    public class Move
+    {
+        public async Task<Box> FindBox(QRCodeWrapper oQRCode)
         {
             CurrentBox = Boxes.FirstOrDefault(oBox => oBox.QRCode == oQRCode);
             if (CurrentBox == null)
@@ -24,11 +44,13 @@ namespace VisualMove
             return CurrentBox;
         }
 
-        public static Box CurrentBox = null;
+        public static string Name = "";
 
-        public static Collection<Box> Boxes = new Collection<Box>();
+        public Box CurrentBox = null;
 
-        public static async void LoadFolders()
+        public Collection<Box> Boxes = new Collection<Box>();
+
+        public async void LoadFolders()
         {
             IReadOnlyList<StorageFolder> oFolders = await ApplicationData.Current.LocalFolder.GetFoldersAsync();
 

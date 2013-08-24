@@ -68,10 +68,10 @@ namespace VisualMove
             m_oFlipView.Items.Clear();
 
             // get box folder
-            Box oCurrentBox = Move.CurrentBox;
+            Box oCurrentBox = MoveList.CurrentMove.CurrentBox;
             if (oCurrentBox != null)
             {
-                StorageFolder oBoxFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(Move.CurrentBox.ImageFolder);
+                StorageFolder oBoxFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(MoveList.CurrentMove.CurrentBox.ImageFolder);
                 IReadOnlyList<StorageFile> oPhotos = await oBoxFolder.GetFilesAsync();
 
                 // iterate through folder and load each photo

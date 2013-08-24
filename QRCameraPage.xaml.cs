@@ -55,7 +55,7 @@ namespace VisualMove
         /// property is typically used to configure the page.</param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            Move.LoadFolders();
+            MoveList.CurrentMove.LoadFolders();
 
             DeviceInformationCollection oCameras = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
             switch (oCameras.Count)
@@ -117,7 +117,7 @@ namespace VisualMove
                 else
                 {
                     Message = string.Format("Found QR code {0}", oQR.ToString());
-                    await Move.FindBox(new QRCodeWrapper(oQR.ToString()));
+                    await MoveList.CurrentMove.FindBox(new QRCodeWrapper(oQR.ToString()));
                     this.Frame.Navigate(typeof(PhotoGallery), null);
                 }
         }
