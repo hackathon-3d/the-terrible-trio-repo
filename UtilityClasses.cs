@@ -37,6 +37,7 @@ namespace VisualMove
 
         public Box(QRCodeWrapper oQRCode)
         {
+            QRCode = oQRCode;
             Photos = new Collection<PhotoWrapper>();
         }
 
