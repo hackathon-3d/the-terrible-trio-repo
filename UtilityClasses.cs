@@ -107,11 +107,9 @@ namespace VisualMove
             {
                 //If a QR code has no images associated, we kill the folder
                 if ((await oFolder.GetFilesAsync()).Count == 0)
-                {
                     await oFolder.DeleteAsync();
-                }
-
-                Boxes.Add(new Box(this, new QRCodeWrapper(oFolder)));
+                else
+                    Boxes.Add(new Box(this, new QRCodeWrapper(oFolder)));
             }
         }
     }
