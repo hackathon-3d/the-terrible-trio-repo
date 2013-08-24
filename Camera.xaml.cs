@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+
 using Windows.ApplicationModel.Activation;
 using Windows.Devices.Enumeration;
 using Windows.Foundation;
@@ -48,7 +50,7 @@ namespace VisualMove
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             DeviceInformationCollection oCameras = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
-            switch(oCameras.Count)
+            switch (oCameras.Count)
             {
                 case 0:
                     throw new Exception("No cameras found");
@@ -60,27 +62,19 @@ namespace VisualMove
                     Camera = oCameras[(int)CameraLocation.Back];
                     break;
             }
+
+            MediaCaptureInitializationSettings oCameraSettings = new MediaCaptureInitializationSettings();
+            oCameraSettings.VideoDeviceId = Camera.Id;
+
+            MediaCapture oCamera = new MediaCapture();
+            await oCamera.InitializeAsync(oCameraSettings);
+            oMediaCapture.Source = oCamera;
+            await oMediaCapture.Source.StartPreviewAsync();
         }
 
         #endregion
 
         #region Event Handlers
-        private async void CaptureElement_Loaded(object sender, RoutedEventArgs e)
-        {
-            CaptureElement oMediaCapture = sender as CaptureElement;
-            if (oMediaCapture == null)
-            {
-                throw new Exception("Event isn't tied to a capture element (and it really should be");
-            }
-
-            MediaCaptureInitializationSettings oCameraSettings = new MediaCaptureInitializationSettings();
-            oCameraSettings.VideoDeviceId = Camera.Id;
-
-            oMediaCapture.Source = new MediaCapture();
-            await oMediaCapture.Source.InitializeAsync(oCameraSettings);
-            await oMediaCapture.Source.StartPreviewAsync();
-        }
-
         private void CameraButton_Click(object sender, RoutedEventArgs e)
         {
 
