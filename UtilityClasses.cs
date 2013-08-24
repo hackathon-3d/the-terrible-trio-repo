@@ -56,6 +56,39 @@ namespace VisualMove
             get;
             set;
         }
+
+        public PhotoWrapper Scroll(bool bForward)
+        {
+            if(bForward == true)
+            {
+                if (Photos.IndexOf(CurrentPhoto) + 1 < Photos.Count)
+                {
+                    CurrentPhoto = Photos[Photos.IndexOf(CurrentPhoto) + 1];
+                }
+                else
+                {
+                    CurrentPhoto = Photos[0];
+                }
+            }
+            else
+            {
+                if (Photos.IndexOf(CurrentPhoto) - 1 >= 0)
+                {
+                    CurrentPhoto = Photos[Photos.IndexOf(CurrentPhoto) - 1];
+                }
+                else
+                {
+                    CurrentPhoto = Photos[Photos.Count - 1];
+                }
+            }
+            return CurrentPhoto;
+        }
+
+        public PhotoWrapper CurrentPhoto
+        {
+            get;
+            set;
+        }
     }
 
     public class QRCodeWrapper
