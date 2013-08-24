@@ -111,6 +111,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MoveListPage.xaml.cs">
+      <DependentUpon>MoveListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MoveName.xaml.cs">
+      <DependentUpon>MoveName.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PhotoCameraPage.xaml.cs">
       <DependentUpon>PhotoCameraPage.xaml</DependentUpon>
     </Compile>
@@ -152,6 +158,14 @@
     <Content Include="Assets\TrashCanBlack.png" />
     <Content Include="Assets\TrashCanWhite.png" />
     <Content Include="Assets\VisualMoveLogoSmall.png" />
+    <Page Include="MoveName.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MoveListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PhotoCameraPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

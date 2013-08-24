@@ -47,7 +47,7 @@ namespace VisualMove
             if (m_oImageToFileMapping != null)
             {
                 foreach (StorageFile oPhoto in m_oImageToFileMapping.Values)
-                {
+        {
                     await oPhoto.DeleteAsync();
                 }
             }
@@ -87,13 +87,14 @@ namespace VisualMove
         {
             // clear existing photos
             m_oFlipView.Items.Clear();
+            m_oImageToFileMapping = new Dictionary<WriteableBitmap, StorageFile>();
 
             // get box folder
-            Box oCurrentBox = Move.CurrentBox;
+            Box oCurrentBox = MoveList.CurrentMove.CurrentBox;
             if (oCurrentBox != null)
             {
-                m_oImageToFileMapping = new Dictionary<WriteableBitmap, StorageFile>();
-                StorageFolder oBoxFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(Move.CurrentBox.ImageFolder);
+                StorageFolder oBoxFolder =
+                    await MoveList.CurrentMove.MoveFolder.GetFolderAsync(MoveList.CurrentMove.CurrentBox.ImageFolder);
                 IReadOnlyList<StorageFile> oPhotos = await oBoxFolder.GetFilesAsync();
 
                 // iterate through folder and load each photo

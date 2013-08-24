@@ -56,7 +56,7 @@ namespace VisualMove
         /// property is typically used to configure the page.</param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            Move.LoadFolders();
+            MoveList.LoadFolders();
 
             DeviceInformationCollection oCameras = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
             switch (oCameras.Count)
@@ -117,35 +117,35 @@ namespace VisualMove
 
             //while (oQR == null)            
             //{
-            InMemoryRandomAccessStream oPhotoStream = new InMemoryRandomAccessStream();
-            await oMediaCapture.Source.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(),
-                                                                 oPhotoStream);
+                InMemoryRandomAccessStream oPhotoStream = new InMemoryRandomAccessStream();
+                await oMediaCapture.Source.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(),
+                                                                     oPhotoStream);
 
-            WriteableBitmap oBitmap = new WriteableBitmap(1, 1);
-            oPhotoStream.Seek(0);
-            oBitmap.SetSource(oPhotoStream);
-            oBitmap = new WriteableBitmap(oBitmap.PixelWidth, oBitmap.PixelHeight);
-            oPhotoStream.Seek(0);
-            oBitmap.SetSource(oPhotoStream);
+                WriteableBitmap oBitmap = new WriteableBitmap(1, 1);
+                oPhotoStream.Seek(0);
+                oBitmap.SetSource(oPhotoStream);
+                oBitmap = new WriteableBitmap(oBitmap.PixelWidth, oBitmap.PixelHeight);
+                oPhotoStream.Seek(0);
+                oBitmap.SetSource(oPhotoStream);
 
-            BarcodeReader oReader = new BarcodeReader();
-            oReader.Options.TryHarder = true;
-            oReader.AutoRotate = true;
+                BarcodeReader oReader = new BarcodeReader();
+                oReader.Options.TryHarder = true;
+                oReader.AutoRotate = true;
 
-            oQR = oReader.Decode(oBitmap);
+                oQR = oReader.Decode(oBitmap);
             //}
 
-            if (oQR == null)
-            {
-                Message = "Could not find QR code";
+                if (oQR == null)
+                {
+                    Message = "Could not find QR code";
 
-            }
-            else
-            {
-                Message = string.Format("Found QR code {0}", oQR.ToString());
-                await Move.FindBox(new QRCodeWrapper(oQR.ToString()));
-                this.Frame.Navigate(typeof(PhotoGallery), null);
-            }
+                }
+                else
+                {
+                    Message = string.Format("Found QR code {0}", oQR.ToString());
+                    await MoveList.CurrentMove.FindBox(new QRCodeWrapper(oQR.ToString()));
+                    this.Frame.Navigate(typeof(PhotoGallery), null);
+                }
 
             // let's refresh the message after a few seconds
             DispatcherTimer oRefreshTimer = new DispatcherTimer();

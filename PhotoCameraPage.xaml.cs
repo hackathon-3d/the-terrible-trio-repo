@@ -83,9 +83,12 @@ namespace VisualMove
         {
             // store photo
             String sFileName = String.Format("{0}.jpg", Guid.NewGuid().ToString());
-            StorageFolder oBoxFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(Move.CurrentBox.ImageFolder);
-            StorageFile oPhotoFile = await oBoxFolder.CreateFileAsync(sFileName, CreationCollisionOption.ReplaceExisting);
-            await oMediaCapture.Source.CapturePhotoToStorageFileAsync(ImageEncodingProperties.CreateJpeg(), oPhotoFile);
+            StorageFolder oBoxFolder =
+                await MoveList.CurrentMove.MoveFolder.GetFolderAsync(MoveList.CurrentMove.CurrentBox.ImageFolder);
+            StorageFile oPhotoFile =
+                await oBoxFolder.CreateFileAsync(sFileName, CreationCollisionOption.ReplaceExisting);
+            await oMediaCapture.Source.CapturePhotoToStorageFileAsync(ImageEncodingProperties.CreateJpeg(),
+                                                                      oPhotoFile);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

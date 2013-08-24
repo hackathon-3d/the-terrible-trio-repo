@@ -9,28 +9,96 @@ using Windows.Storage;
 
 namespace VisualMove
 {
-    public static class Move
+    public static class MoveList
     {
-        public static async Task<Box> FindBox(QRCodeWrapper oQRCode)
+        static MoveList()
+        {
+            MoveListCollection = new Collection<Move>();
+        }
+
+        public static Collection<Move> MoveListCollection
+        {
+            get;
+            set;
+        }
+
+        public static Move CurrentMove
+        {
+            get;
+            set;
+        }
+
+        public static async Task<Move> FindMove(string sName)
+        {
+            CurrentMove = MoveListCollection.FirstOrDefault(oMove => oMove.Name == sName);
+            if (CurrentMove == null)
+            {
+                StorageFolder oMoveFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(sName);
+                CurrentMove = new Move(oMoveFolder);
+                MoveListCollection.Add(CurrentMove);
+            }
+
+            return CurrentMove;
+        }
+
+        public static async void LoadFolders()
+        {
+            IReadOnlyList<StorageFolder> oFolders = await ApplicationData.Current.LocalFolder.GetFoldersAsync();
+
+            foreach (StorageFolder oFolder in oFolders)
+            {
+                Move oMove = new Move(oFolder);
+                MoveListCollection.Add(oMove);
+                oMove.LoadFolders();
+            }
+
+            //TODO:  Remove this:
+            CurrentMove = await MoveList.FindMove("TempMove");
+        }
+    }
+
+    public class Move
+    {
+        public Move(StorageFolder oFolder)
+        {
+            MoveFolder = oFolder;
+        }
+
+        public async Task<Box> FindBox(QRCodeWrapper oQRCode)
         {
             CurrentBox = Boxes.FirstOrDefault(oBox => oBox.QRCode == oQRCode);
             if (CurrentBox == null)
             {
-                CurrentBox = new Box(oQRCode);
-                await ApplicationData.Current.LocalFolder.CreateFolderAsync(CurrentBox.ImageFolder);
+                CurrentBox = new Box(this, oQRCode);
+                await MoveFolder.CreateFolderAsync(CurrentBox.ImageFolder);
                 Boxes.Add(CurrentBox);
             }
 
             return CurrentBox;
         }
 
-        public static Box CurrentBox = null;
-
-        public static Collection<Box> Boxes = new Collection<Box>();
-
-        public static async void LoadFolders()
+        public string Name
         {
-            IReadOnlyList<StorageFolder> oFolders = await ApplicationData.Current.LocalFolder.GetFoldersAsync();
+            get
+            {
+                return MoveFolder.Name;
+            }
+        }
+
+        public StorageFolder MoveFolder
+        {
+            get;
+            private set;
+        }
+
+        public Box CurrentBox = null;
+
+        public Collection<Box> Boxes = new Collection<Box>();
+
+        public async void LoadFolders()
+        {
+            
+            IReadOnlyList<StorageFolder> oFolders = await MoveFolder.GetFoldersAsync();
 
             foreach (StorageFolder oFolder in oFolders)
             {
@@ -40,16 +108,23 @@ namespace VisualMove
                     await oFolder.DeleteAsync();
                 }
 
-                Boxes.Add(new Box(new QRCodeWrapper(oFolder)));
+                Boxes.Add(new Box(this, new QRCodeWrapper(oFolder)));
             }
         }
     }
 
     public class Box
     {
-        public Box(QRCodeWrapper oQRCode)
+        public Box(Move oMove, QRCodeWrapper oQRCode)
         {
+            AssociatedMove = oMove;
             QRCode = oQRCode;
+        }
+
+        public Move AssociatedMove
+        {
+            get;
+            private set;
         }
 
         public QRCodeWrapper QRCode
