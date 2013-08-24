@@ -56,6 +56,12 @@ namespace VisualMove
 
             foreach (StorageFolder oFolder in oFolders)
             {
+                //If a QR code has no images associated, we kill the folder
+                if ((await oFolder.GetFilesAsync()).Count == 0)
+                {
+                    await oFolder.DeleteAsync();
+                }
+
                 Boxes.Add(new Box(new QRCodeWrapper(oFolder)));
             }
         }

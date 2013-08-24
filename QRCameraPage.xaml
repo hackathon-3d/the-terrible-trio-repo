@@ -8,18 +8,40 @@
     mc:Ignorable="d">
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="Auto"/>
+            <RowDefinition 
+                Height="*" />
+            <RowDefinition 
+                Height="Auto" />
+            <RowDefinition 
+                Height="Auto" />
         </Grid.RowDefinitions>
-        <CaptureElement x:Name="oMediaCapture"   />
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Button Content="Take Picture" Click="CameraButton_Click"/>
-            <TextBlock Grid.Column="2" x:Name="m_oTextMessage" />
-        </Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="*" />
+            <ColumnDefinition
+                Width="Auto" />
+            <ColumnDefinition
+                Width="*" />
+        </Grid.ColumnDefinitions>
+        <CaptureElement 
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            Grid.ColumnSpan="3"
+            x:Name="oMediaCapture" />
+        <TextBlock 
+            Grid.Row="1"
+            Grid.Column="1" 
+            FontSize="24"
+            HorizontalAlignment="Center"
+            x:Name="m_oTextMessage" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            Height="128"
+            Style="{StaticResource ButtonStyle}"
+            Click="CameraButton_Click">
+            <Image
+                Source="/Assets/CameraIconWhite.png" />
+        </Button>
     </Grid>
 </Page>
