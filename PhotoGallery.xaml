@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="VisualMove.Gallery"
+    x:Class="VisualMove.PhotoGallery"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:VisualMove"
@@ -28,30 +28,51 @@
         <Button 
             Grid.Row="0"
             Grid.Column="0"
-            Content="Back" 
+            Height="80"
             x:Name="BackButton" 
             Click="BackButton_Click" 
-            HorizontalAlignment="Stretch" 
-            Height="48" />
+            BorderBrush="Transparent"
+            Opacity="0.85"
+            HorizontalAlignment="Stretch">
+            <Image
+                Source="/Assets/BackIconWhite.png" />
+        </Button>
         <Button 
             Grid.Row="0"
             Grid.Column="2"
             Height="80"
             x:Name="CameraButton"
             Click="CameraButton_Click" 
-            HorizontalAlignment="Stretch"
             BorderBrush="Transparent"
-            Opacity="0.75">
+            Opacity="0.85"
+            HorizontalAlignment="Stretch">
             <Image
                 Source="/Assets/CameraIconWhite.png" />
+
         </Button>
         <Button 
             Grid.Row="3"
-            Grid.Column="2"
-            Content="Clear Gallery" 
+            Grid.Column="0"
+            Height="96"
+            x:Name="DeleteButton"
+            Click="DeleteButton_Click" 
+            BorderBrush="Transparent"
+            Opacity="0.85"
+            HorizontalAlignment="Stretch">
+            <Image
+                Source="/Assets/TrashCanWhite.png" />
+        </Button>
+        <Button 
+            Grid.Row="3"
+            Grid.Column="2" 
             x:Name="ClearButton" 
-            Click="ClearButton_Click" 
-            HorizontalAlignment="Stretch" 
-            Height="48" />
+            Click="ClearButton_Click"
+            BorderBrush="Transparent"
+            Opacity="0.85"
+            Height="96"
+            HorizontalAlignment="Stretch">
+            <Image
+                Source="/Assets/ExplosionIconWhite.png" />
+        </Button>
     </Grid>
 </Page>

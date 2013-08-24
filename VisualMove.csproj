@@ -117,8 +117,8 @@
     <Compile Include="QRCameraPage.xaml.cs">
       <DependentUpon>QRCameraPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Gallery.xaml.cs">
-      <DependentUpon>Gallery.xaml</DependentUpon>
+    <Compile Include="PhotoGallery.xaml.cs">
+      <DependentUpon>PhotoGallery.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtilityClasses.cs" />
@@ -130,16 +130,26 @@
     <None Include="VisualMove_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ArrowBackwardBlack.png" />
+    <Content Include="Assets\ArrowBackwardWhite.png" />
+    <Content Include="Assets\ArrowForwardBlack.png" />
+    <Content Include="Assets\ArrowForwardWhite.png" />
+    <Content Include="Assets\BackIconBlack.png" />
+    <Content Include="Assets\BackIconWhite.png" />
     <Content Include="Assets\CameraIconBlack.png" />
     <Content Include="Assets\CameraIconBlue.png" />
     <Content Include="Assets\CameraIconRed.png" />
     <Content Include="Assets\CameraIconWhite.png" />
+    <Content Include="Assets\ExplosionIconBlack.png" />
+    <Content Include="Assets\ExplosionIconWhite.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-140.png" />
     <Content Include="Assets\SplashScreen.scale-180.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\TrashCanBlack.png" />
+    <Content Include="Assets\TrashCanWhite.png" />
     <Page Include="PhotoCameraPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -148,7 +158,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Gallery.xaml">
+    <Page Include="PhotoGallery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
