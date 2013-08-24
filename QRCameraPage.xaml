@@ -39,6 +39,7 @@
             Grid.Row="1"
             Grid.Column="1" 
             FontSize="24"
+            Text="Waiting for QR Code..."
             HorizontalAlignment="Center"
             x:Name="m_oTextMessage" />
         <Button

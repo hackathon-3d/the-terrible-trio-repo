@@ -150,8 +150,8 @@ namespace VisualMove
                 oSegment.Points = oNewPoints;
 
                 // set drawing canvas size
-                DrawingCanvas.Width = oMediaCapture.Width;
-                DrawingCanvas.Height = oMediaCapture.Height;
+                //DrawingCanvas.Width = oMediaCapture.Width;
+                //DrawingCanvas.Height = oMediaCapture.Height;
 
                 // add polygon to canvas
                 DrawingCanvas.Children.Add(oSegment);
@@ -178,7 +178,7 @@ namespace VisualMove
 
         void oTransitionTimer_Tick(object sender, object e)
         {
-            Message = String.Empty;
+            Message = WaitingForQR;
             DispatcherTimer oTransitionTimer = (DispatcherTimer)sender;
             oTransitionTimer.Stop();
             this.Frame.Navigate(typeof(PhotoGallery), null);
@@ -217,6 +217,7 @@ namespace VisualMove
         #region Constants
 
         private const int TRANSITION_TIMER_INTERVAL = 3;
+        private const string WaitingForQR = "Waiting for QR Code...";
         private const string QRCodeText = "Snap a Box QR Code!";
         private const string GalleryText = "Snap a pic for the Gallery!";
         private string m_sMode = "";
