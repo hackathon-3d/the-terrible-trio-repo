@@ -119,7 +119,7 @@ namespace VisualMove
             Result oQR = null;
             m_bTakePictures = true;
 
-            Box oReferenceBox = e.Content as Box;
+            Box oReferenceBox = e.Parameter as Box;
             bool bSearchMode = oReferenceBox != null;
 
             while (m_bTakePictures && (oQR == null || bSearchMode))
@@ -143,7 +143,7 @@ namespace VisualMove
 
                 if (bSearchMode && (oQR != null))
                 {
-                    bSearchMode = oQR.ToString().GetHashCode().ToString() == oReferenceBox.QRCode.QRCode;
+                    bSearchMode = oQR.ToString().GetHashCode().ToString() != oReferenceBox.QRCode.QRCode;
                     m_bBoxMatchingMode = true;
                 }
                 else
