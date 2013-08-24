@@ -36,7 +36,7 @@
         <Button
             Grid.Row="1"
             Grid.Column="0"
-            Height="128"
+            Height="96"
             Margin="16"
             Style="{StaticResource ButtonStyle}"
             HorizontalAlignment="Left"
@@ -48,7 +48,7 @@
         <Button
             Grid.Row="1"
             Grid.Column="1"
-            Height="128"
+            Height="96"
             Margin="16"
             Style="{StaticResource ButtonStyle}"
             Click="CameraButton_Click">
