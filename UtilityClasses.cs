@@ -120,6 +120,13 @@ namespace VisualMove
         {
             AssociatedMove = oMove;
             QRCode = oQRCode;
+            IsPacked = true;
+        }
+
+        public bool IsPacked
+        {
+            get;
+            set;
         }
 
         public Move AssociatedMove

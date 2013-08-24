@@ -146,10 +146,12 @@
     <Content Include="Assets\CameraIconBlue.png" />
     <Content Include="Assets\CameraIconRed.png" />
     <Content Include="Assets\CameraIconWhite.png" />
+    <Content Include="Assets\ClosedBoxIcon.png" />
     <Content Include="Assets\ExplosionIconBlack.png" />
     <Content Include="Assets\ExplosionIconWhite.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\MovingVanIconWhite.png" />
+    <Content Include="Assets\OpenBoxIcon.png" />
     <Content Include="Assets\PicturesHeaderWhite.png" />
     <Content Include="Assets\QRCameraIconWhite.png" />
     <Content Include="Assets\SmallLogo.png" />

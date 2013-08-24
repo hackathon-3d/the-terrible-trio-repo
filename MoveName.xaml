@@ -9,7 +9,7 @@
     d:DesignHeight="110"
     d:DesignWidth="410">
     <Border BorderThickness="5">
-        <Grid Background="DarkRed">
+        <Grid Background="Black">
             <StackPanel>
                 <TextBox Margin="10,10,10,5" Name="m_oMoveName" Text="Default Name"/>
                 <Button Margin="10, 5, 10, 10" HorizontalAlignment="Center" Content="OK" Click="Button_Click" />
