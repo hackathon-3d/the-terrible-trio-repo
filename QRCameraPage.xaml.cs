@@ -197,8 +197,7 @@ namespace VisualMove
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // do nothing
-            this.Frame.GoBack();
+            Frame.Navigate(typeof(MoveListPage));
         }
 
         #endregion
