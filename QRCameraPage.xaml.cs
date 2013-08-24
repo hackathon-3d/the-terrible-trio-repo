@@ -78,6 +78,30 @@ namespace VisualMove
 
             MediaCapture oCamera = new MediaCapture();
             await oCamera.InitializeAsync(oCameraSettings);
+
+            // resolution variables
+            int iMaxResolution = 0;
+            int iSelectedIndex = 0;
+            IReadOnlyList<IMediaEncodingProperties> oAvailableResolutions = oCamera.VideoDeviceController.GetAvailableMediaStreamProperties(MediaStreamType.Photo);
+
+            // if no settings available, bail
+            if (oAvailableResolutions.Count < 1) return;
+
+            // list the different format settings
+            for (int i = 0; i < oAvailableResolutions.Count; i++)
+            {
+                VideoEncodingProperties oProperties = (VideoEncodingProperties)oAvailableResolutions[i];
+                if (oProperties.Width * oProperties.Height > iMaxResolution)
+                {
+                    iMaxResolution = (int)oProperties.Width;
+                    iSelectedIndex = i;
+                }
+            }
+
+            // set resolution
+            await oCamera.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoPreview, oAvailableResolutions[iSelectedIndex]);
+
+            // begin video preview
             oMediaCapture.Source = oCamera;
             await oMediaCapture.Source.StartPreviewAsync();
         }
@@ -135,9 +159,9 @@ namespace VisualMove
             Message = String.Empty;
         }
 
-        private void GalleryButton_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-
+            // do nothing
         }
 
         #endregion
@@ -165,10 +189,12 @@ namespace VisualMove
         #endregion
 
         #region Constants
+
         private const int REFRESH_TIMER_INTERVAL = 5;
         private const string QRCodeText = "Snap a Box QR Code!";
         private const string GalleryText = "Snap a pic for the Gallery!";
         private string m_sMode = "";
+
         #endregion
     }
 }

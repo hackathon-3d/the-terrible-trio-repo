@@ -88,7 +88,7 @@ namespace VisualMove
             await oMediaCapture.Source.CapturePhotoToStorageFileAsync(ImageEncodingProperties.CreateJpeg(), oPhotoFile);
         }
 
-        private void GalleryButton_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.GoBack();
         }

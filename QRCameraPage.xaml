@@ -36,6 +36,16 @@
             x:Name="m_oTextMessage" />
         <Button
             Grid.Row="2"
+            Grid.Column="0"
+            Height="128"
+            Style="{StaticResource ButtonStyle}"
+            HorizontalAlignment="Left"
+            Click="BackButton_Click">
+            <Image
+                Source="/Assets/BackIconWhite.png" />
+        </Button>
+        <Button
+            Grid.Row="2"
             Grid.Column="1"
             Height="128"
             Style="{StaticResource ButtonStyle}"
