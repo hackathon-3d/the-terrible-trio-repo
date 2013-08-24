@@ -57,8 +57,6 @@ namespace VisualMove
         /// property is typically used to configure the page.</param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            MoveList.LoadFolders();
-
             DeviceInformationCollection oCameras = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
             switch (oCameras.Count)
             {

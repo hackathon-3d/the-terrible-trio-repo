@@ -16,17 +16,29 @@ using Windows.UI.Xaml.Navigation;
 
 namespace VisualMove
 {
-    public sealed partial class MoveName : UserControl
+    public sealed partial class MoveName : Page
     {
         public MoveName()
         {
             this.InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             MoveNameString = m_oMoveName.Text;
             this.Visibility = Visibility.Collapsed;
+
+            //TODO:  Check for valid names
+
+            if (MoveList.MoveListCollection.Select(oMove => oMove.Name).Contains(MoveNameString))
+            {
+                //TODO:  Tell user that name already exists
+            }
+            else
+            {
+                await MoveList.FindMove(MoveNameString);
+                Frame.Navigate(typeof(QRCameraPage));
+            }
         }
 
         public string MoveNameString
