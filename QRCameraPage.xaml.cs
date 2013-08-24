@@ -42,6 +42,7 @@ namespace VisualMove
 
         #region Data Members
         private bool m_bTakePictures;
+        private bool m_bBoxMatchingMode;
         #endregion
 
         #region Constructors
@@ -117,7 +118,11 @@ namespace VisualMove
 
             Result oQR = null;
             m_bTakePictures = true;
-            while (m_bTakePictures && oQR == null)
+
+            Box oReferenceBox = e.Content as Box;
+            bool bSearchMode = oReferenceBox != null;
+
+            while (m_bTakePictures && (oQR == null || bSearchMode))
             {
                 InMemoryRandomAccessStream oPhotoStream = new InMemoryRandomAccessStream();
                 await oMediaCapture.Source.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(),
@@ -135,6 +140,16 @@ namespace VisualMove
                 oReader.AutoRotate = true;
 
                 oQR = oReader.Decode(oBitmap);
+
+                if (bSearchMode && (oQR != null))
+                {
+                    bSearchMode = oQR.ToString().GetHashCode().ToString() == oReferenceBox.QRCode.QRCode;
+                    m_bBoxMatchingMode = true;
+                }
+                else
+                {
+                    m_bBoxMatchingMode = false;
+                }
             }
 
             if (oQR != null)
@@ -190,11 +205,14 @@ namespace VisualMove
 
         void oTransitionTimer_Tick(object sender, object e)
         {
-            Message = WaitingForQR;
-            DispatcherTimer oTransitionTimer = (DispatcherTimer)sender;
-            oTransitionTimer.Stop();
-            QRCodeImage.Visibility = Visibility.Collapsed;
-            this.Frame.Navigate(typeof(PhotoGallery), null);
+            if (!m_bBoxMatchingMode)
+            {
+                Message = WaitingForQR;
+                DispatcherTimer oTransitionTimer = (DispatcherTimer)sender;
+                oTransitionTimer.Stop();
+                QRCodeImage.Visibility = Visibility.Collapsed;
+                this.Frame.Navigate(typeof(PhotoGallery), null);
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
