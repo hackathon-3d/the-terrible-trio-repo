@@ -34,5 +34,16 @@ namespace VisualMove
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+
+        private void GalleryButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
+        }
+
+        private void CameraButton_Click(object sender, RoutedEventArgs e)
+        {
+            PhotoWrapper oNewPhoto = new PhotoWrapper();
+            Move.CurrentBox.Photos.Add(oNewPhoto);
+        }
     }
 }

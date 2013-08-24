@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
-
 using Windows.ApplicationModel.Activation;
 using Windows.Devices.Enumeration;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.Capture;
-using Windows.Media.MediaProperties;
-using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -19,7 +16,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-
 using ZXing;
 using ZXing.QrCode;
 
@@ -85,29 +81,18 @@ namespace VisualMove
         private async void CameraButton_Click(object sender, RoutedEventArgs e)
         {
             Message = "Looking for QR Code";
-            Result oQR = null;
 
-            while (oQR == null)            
-            {
-                InMemoryRandomAccessStream oPhotoStream = new InMemoryRandomAccessStream();
-                await oMediaCapture.Source.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(),
-                                                                     oPhotoStream);
-
-                WriteableBitmap oBitmap = new WriteableBitmap((int)oMediaCapture.ActualWidth,
-                                                              (int)oMediaCapture.ActualHeight);
-                oBitmap.SetSource(oPhotoStream);
-                BarcodeReader oReader = new BarcodeReader();
-                oQR = oReader.Decode(oBitmap);
-            }
-
+            
             Message = string.Format("Found QR code {0}", oQR.ToString());
         }
-
-        private void GalleryButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         #endregion
+
+        protected async void DisplayMessageBox(string sMessage, string sTitle)
+        {
+            var oMessageDialog = new Windows.UI.Popups.MessageDialog(sMessage, sTitle);
+            oMessageDialog.DefaultCommandIndex = 1;
+            await oMessageDialog.ShowAsync();
+        }
 
         #region Properties
         public string Message
@@ -122,40 +107,6 @@ namespace VisualMove
             set;
         }
 
-        // Sets the mode
-        // Mode 1 = "QRCode" = take a QR code pic, examine it to see if it's valid, and go to the gallery if so (showing pics if they exist)
-        // Mode 2 = "Gallery" = you are taking pictures of stuff for the gallery
-        public string Mode
-        {
-            get
-            {
-                return m_sMode;
-            }
-            set
-            {
-                //m_sMode = value;
-                //if (m_sMode == "QRCode")
-                //{
-                //    // Show label that tells user to take a photo of a QR Code
-                //    InfoText.Text = QRCodeText;
-                //    // Hide button to go to gallery
-                //    GalleryButton.Visibility = Visibility.Collapsed;
-                //}
-                //else if(m_sMode == "Gallery")
-                //{
-                //    // Show label that tells user to take a photo of stuff for the gallery
-                //    InfoText.Text = GalleryText;
-                //    // Show button to go to gallery
-                //    GalleryButton.Visibility = Visibility.Visible;
-                //}
-            }
-        }
-        #endregion
-
-        #region Constants
-        private const string QRCodeText = "Snap a Box QR Code!";
-        private const string GalleryText = "Snap a pic for the Gallery!";
-        private string m_sMode = "";
         #endregion
     }
 }
