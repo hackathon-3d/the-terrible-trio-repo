@@ -46,16 +46,24 @@ namespace VisualMove
         {
             if (m_oMoveList.Items.Count > 0 && m_oMoveList.SelectedIndex != -1)
             {
-                await MoveList.DeleteCurrentMove();
-                m_oMoveList.ItemsSource = null;
-                m_oMoveList.ItemsSource = MoveList.MoveListCollection;
-                m_oMoveList.SelectedItem = null;
+                //int iIndex = m_oMoveList.SelectedIndex;
+                //m_oMoveList.Items.RemoveAt(iIndex);
+                //m_oRegressionProfile.Configs.RemoveAt(iIndex);
+                //if (iIndex > 0)
+                //{
+                //    m_oRegressionListView.SelectedItem = m_oRegressionListView.Items[iIndex - 1];
+                //}
+                //else if (iIndex == 0 && m_oRegressionListView.Items.Count > 0)
+                //{
+                //    m_oRegressionListView.SelectedItem = m_oRegressionListView.Items[0];
+                //}
             }
         }
 
         private void m_oMoveList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MoveList.CurrentMove = m_oMoveList.SelectedItem as Move;
+            Frame.Navigate(typeof(QRCameraPage));
         }
     }
 }
