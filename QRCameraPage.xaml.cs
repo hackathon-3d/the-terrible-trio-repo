@@ -81,30 +81,30 @@ namespace VisualMove
             await oCamera.InitializeAsync(oCameraSettings);
 
             // resolution variables
-            int iMaxResolution = 0;
-            int iHeight = 0;
-            int iWidth = 0;
-            int iSelectedIndex = 0;
-            IReadOnlyList<IMediaEncodingProperties> oAvailableResolutions = oCamera.VideoDeviceController.GetAvailableMediaStreamProperties(MediaStreamType.Photo);
+            //int iMaxResolution = 0;
+            //int iHeight = 0;
+            //int iWidth = 0;
+            //int iSelectedIndex = 0;
+            //IReadOnlyList<IMediaEncodingProperties> oAvailableResolutions = oCamera.VideoDeviceController.GetAvailableMediaStreamProperties(MediaStreamType.Photo);
 
-            // if no settings available, bail
-            if (oAvailableResolutions.Count < 1) return;
+            //// if no settings available, bail
+            //if (oAvailableResolutions.Count < 1) return;
 
-            // list the different format settings
-            for (int i = 0; i < oAvailableResolutions.Count; i++)
-            {
-                VideoEncodingProperties oProperties = (VideoEncodingProperties)oAvailableResolutions[i];
-                if (oProperties.Width * oProperties.Height > iMaxResolution)
-                {
-                    iHeight = (int)oProperties.Height;
-                    iWidth = (int)oProperties.Width;
-                    iMaxResolution = (int)oProperties.Width;
-                    iSelectedIndex = i;
-                }
-            }
+            //// list the different format settings
+            //for (int i = 0; i < oAvailableResolutions.Count; i++)
+            //{
+            //    VideoEncodingProperties oProperties = (VideoEncodingProperties)oAvailableResolutions[i];
+            //    if (oProperties.Width * oProperties.Height > iMaxResolution)
+            //    {
+            //        iHeight = (int)oProperties.Height;
+            //        iWidth = (int)oProperties.Width;
+            //        iMaxResolution = (int)oProperties.Width;
+            //        iSelectedIndex = i;
+            //    }
+            //}
 
-            // set resolution
-            await oCamera.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoPreview, oAvailableResolutions[iSelectedIndex]);
+            //// set resolution
+            //await oCamera.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoPreview, oAvailableResolutions[iSelectedIndex]);
 
             // begin video preview
             oMediaCapture.Source = oCamera;
@@ -152,8 +152,8 @@ namespace VisualMove
                 oSegment.Points = oNewPoints;
 
                 // set drawing canvas size
-                DrawingCanvas.Width = iWidth;
-                DrawingCanvas.Height = iHeight;
+                DrawingCanvas.Width = oMediaCapture.Width;
+                DrawingCanvas.Height = oMediaCapture.Height;
 
                 // add polygon to canvas
                 DrawingCanvas.Children.Add(oSegment);

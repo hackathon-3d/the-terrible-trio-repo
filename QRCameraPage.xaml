@@ -29,13 +29,12 @@
             Grid.ColumnSpan="3"
             x:Name="oMediaCapture" />
         <Canvas
-            Grid.Row="0"
-            Grid.RowSpan="3"
             Grid.ColumnSpan="3"
-            Background="Transparent"
-            Width="1280"
-            Height="720"
-            x:Name="DrawingCanvas" />
+            Grid.RowSpan="3"
+            Background="Green"
+            Opacity="0.5"
+            x:Name="DrawingCanvas">
+        </Canvas>
         <TextBlock 
             Grid.Row="1"
             Grid.Column="1" 
