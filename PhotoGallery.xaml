@@ -36,6 +36,11 @@
                 </DataTemplate>
             </FlipView.ItemTemplate>
         </FlipView>
+        <Rectangle
+            Grid.Row="0"
+            Grid.ColumnSpan="3"
+            Fill="Black"
+            Opacity="0.75" />
         <Image
             Grid.Row="0"
             Grid.Column="1"
@@ -63,6 +68,11 @@
             <Image
                 Source="/Assets/CameraIconWhite.png" />
         </Button>
+        <Rectangle
+            Grid.Row="2"
+            Grid.ColumnSpan="3"
+            Fill="Black"
+            Opacity="0.75" />
         <Button 
             Grid.Row="3"
             Grid.Column="0"
