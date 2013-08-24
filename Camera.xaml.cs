@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using Windows.ApplicationModel.Activation;
 using Windows.Devices.Enumeration;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -22,7 +22,7 @@ namespace VisualMove
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CameraPage : Page
+    public partial class CameraPage : Page
     {
         #region Enumerations
         private enum CameraLocation
@@ -61,6 +61,7 @@ namespace VisualMove
                     break;
             }
         }
+
         #endregion
 
         #region Event Handlers

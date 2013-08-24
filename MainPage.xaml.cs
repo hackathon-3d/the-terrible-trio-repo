@@ -45,5 +45,12 @@ namespace VisualMove
             oCamera.Visibility = Visibility.Visible;
             oGallery.Visibility = Visibility.Collapsed;
         }
+
+        protected override void OnTapped(TappedRoutedEventArgs e)
+        {
+            base.OnTapped(e);
+
+            this.Frame.Navigate(typeof(CameraPage), null);
+        }
     }
 }

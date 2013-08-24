@@ -126,6 +126,10 @@
     <None Include="VisualMove_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\CameraIconBlack.png" />
+    <Content Include="Assets\CameraIconBlue.png" />
+    <Content Include="Assets\CameraIconRed.png" />
+    <Content Include="Assets\CameraIconWhite.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />

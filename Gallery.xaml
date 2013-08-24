@@ -6,13 +6,60 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Button Content="Delete" Name="DeleteButton" Click="DeleteButton_Click" HorizontalAlignment="Stretch" Height="50"/>
-            <Button Content="Clear Gallery" Name="ClearButton" Click="ClearButton_Click" HorizontalAlignment="Stretch" Height="50"/>
-            <Button Content="Back" Name="BackButton" Click="BackButton_Click" HorizontalAlignment="Stretch" Height="50"/>
-            <Button Content="Camera" Name="CameraButton" Click="CameraButton_Click" HorizontalAlignment="Stretch" Height="50"/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="*" />
+            <RowDefinition
+                Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="Auto" />
+            <ColumnDefinition
+                Width="*" />
+            <ColumnDefinition
+                Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Button 
+            Grid.Row="0"
+            Grid.Column="0"
+            Content="Back" 
+            x:Name="BackButton" 
+            Click="BackButton_Click" 
+            HorizontalAlignment="Stretch" 
+            Height="48" />
+        <Button 
+            Grid.Row="0"
+            Grid.Column="2"
+            Height="80"
+            x:Name="CameraButton"
+            Click="CameraButton_Click" 
+            HorizontalAlignment="Stretch"
+            BorderBrush="Transparent"
+            Opacity="0.75">
+            <Image
+                Source="/Assets/CameraIconWhite.png" />
+        </Button>
+        <Button 
+            Grid.Row="3"
+            Grid.Column="0"
+            Content="Delete" 
+            x:Name="DeleteButton" 
+            Click="DeleteButton_Click" 
+            HorizontalAlignment="Stretch" 
+            Height="48" />
+        <Button 
+            Grid.Row="3"
+            Grid.Column="2"
+            Content="Clear Gallery" 
+            x:Name="ClearButton" 
+            Click="ClearButton_Click" 
+            HorizontalAlignment="Stretch" 
+            Height="48" />
     </Grid>
 </Page>
