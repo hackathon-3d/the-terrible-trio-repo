@@ -19,7 +19,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Button Content="Take Picture" Click="CameraButton_Click"/>
-            <TextBlock Grid.Column="2" Text="{Binding Message}" />
+            <TextBlock Grid.Column="2" x:Name="m_oTextMessage" />
         </Grid>
     </Grid>
 </Page>
