@@ -7,18 +7,13 @@ using System.Threading.Tasks;
 
 namespace VisualMove
 {
-    public class Move
+    public static class Move
     {
-        public Move()
-        {
-            Boxes = new Collection<Box>();
-        }
-
-        public Box FindBox(QRCodeWrapper QRCode)
+        public static Box FindBox(QRCodeWrapper oQRCode)
         {
             foreach(Box oBox in Boxes)
             {
-                if (oBox.QRCode == QRCode) // This WILL NOT WORK. Need to find a compare method in QR code library that will work
+                if (oBox.QRCode == oQRCode) // This WILL NOT WORK. Need to find a compare method in QR code library that will work
                 {
                     return oBox;
                 }
@@ -26,11 +21,7 @@ namespace VisualMove
             return null;
         }
 
-        public Collection<Box> Boxes 
-        {
-            get;
-            set;
-        }
+        public static Collection<Box> Boxes = new Collection<Box>();
     }
 
     public class Box
@@ -57,6 +48,7 @@ namespace VisualMove
             set;
         }
 
+        // May not be used
         public PhotoWrapper Scroll(bool bForward)
         {
             if(bForward == true)
@@ -84,6 +76,7 @@ namespace VisualMove
             return CurrentPhoto;
         }
 
+        // May not be used
         public PhotoWrapper CurrentPhoto
         {
             get;

@@ -107,8 +107,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Camera.xaml.cs">
-      <DependentUpon>Camera.xaml</DependentUpon>
+    <Compile Include="PhotoCameraPage.xaml.cs">
+      <DependentUpon>PhotoCameraPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="QRCameraPage.xaml.cs">
+      <DependentUpon>QRCameraPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gallery.xaml.cs">
       <DependentUpon>Gallery.xaml</DependentUpon>
@@ -136,7 +139,11 @@
     <Content Include="Assets\SplashScreen.scale-140.png" />
     <Content Include="Assets\SplashScreen.scale-180.png" />
     <Content Include="Assets\StoreLogo.png" />
-    <Page Include="Camera.xaml">
+    <Page Include="PhotoCameraPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QRCameraPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -19,9 +19,9 @@ namespace VisualMove
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class PhotoCameraPage : Page
     {
-        public MainPage()
+        public PhotoCameraPage()
         {
             this.InitializeComponent();
         }
@@ -33,13 +33,6 @@ namespace VisualMove
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-        }
-
-        protected override void OnTapped(TappedRoutedEventArgs e)
-        {
-            base.OnTapped(e);
-
-            this.Frame.Navigate(typeof(QRCameraPage), null);
         }
     }
 }

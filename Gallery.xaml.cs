@@ -36,51 +36,22 @@ namespace VisualMove
         {
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            int index = CurrentBox.Photos.IndexOf(CurrentBox.CurrentPhoto);
-            CurrentBox.Photos.Remove(CurrentBox.CurrentPhoto);
-            if (index - 1 < 0)
-            {
-                //if(
-                // CurrentBox.CurrentPhoto = CurrentBox.Photos[index + 1];
-                // else
-                {
-                    // We are empty, no photos left
-                    CurrentBox.CurrentPhoto = null;
-                    DeleteButton.IsEnabled = false;
-                    ClearButton.IsEnabled = false;
-                }
-            }
-            else
-            {
-                CurrentBox.CurrentPhoto = CurrentBox.Photos[index];
-            }
-        }
-
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
+            // May want a messagebox here
             CurrentBox.Photos.Clear();
-            DeleteButton.IsEnabled = false;
-            ClearButton.IsEnabled = false;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Camera.Mode = "QRCode";
             // Open Window
+            this.Frame.Navigate(typeof(QRCameraPage), null);
         }
 
         private void CameraButton_Click(object sender, RoutedEventArgs e)
         {
-            Camera.Mode = "Gallery";
             // Open Window
-        }
-
-        public CameraPage Camera
-        {
-            get;
-            set;
+            this.Frame.Navigate(typeof(PhotoCameraPage), null);
         }
 
         public Box CurrentBox 

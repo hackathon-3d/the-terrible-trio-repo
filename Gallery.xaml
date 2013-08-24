@@ -47,14 +47,6 @@
         </Button>
         <Button 
             Grid.Row="3"
-            Grid.Column="0"
-            Content="Delete" 
-            x:Name="DeleteButton" 
-            Click="DeleteButton_Click" 
-            HorizontalAlignment="Stretch" 
-            Height="48" />
-        <Button 
-            Grid.Row="3"
             Grid.Column="2"
             Content="Clear Gallery" 
             x:Name="ClearButton" 
