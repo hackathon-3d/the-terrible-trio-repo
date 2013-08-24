@@ -15,11 +15,15 @@ namespace VisualMove
             {
                 if (oBox.QRCode == oQRCode) // This WILL NOT WORK. Need to find a compare method in QR code library that will work
                 {
+                    CurrentBox = oBox;
                     return oBox;
                 }
             }
-            return null;
+            CurrentBox = new Box(oQRCode);
+            return CurrentBox;
         }
+
+        public static Box CurrentBox = null;
 
         public static Collection<Box> Boxes = new Collection<Box>();
     }
