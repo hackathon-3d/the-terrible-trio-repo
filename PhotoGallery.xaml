@@ -46,10 +46,8 @@
             Height="80"
             Margin="16"
             x:Name="BackButton" 
-            Click="BackButton_Click" 
-            BorderBrush="Transparent"
-            Opacity="0.85"
-            HorizontalAlignment="Stretch">
+            Style="{StaticResource ButtonStyle}"
+            Click="BackButton_Click" >
             <Image
                 Source="/Assets/BackIconWhite.png" />
         </Button>
@@ -60,9 +58,7 @@
             Margin="16"
             x:Name="CameraButton"
             Click="CameraButton_Click" 
-            BorderBrush="Transparent"
-            Opacity="0.85"
-            HorizontalAlignment="Stretch">
+            Style="{StaticResource ButtonStyle}">
             <Image
                 Source="/Assets/CameraIconWhite.png" />
 
@@ -74,9 +70,7 @@
             Margin="16"
             x:Name="DeleteButton"
             Click="DeleteButton_Click" 
-            BorderBrush="Transparent"
-            Opacity="0.85"
-            HorizontalAlignment="Stretch">
+            Style="{StaticResource ButtonStyle}">
             <Image
                 Source="/Assets/TrashCanWhite.png" />
         </Button>
@@ -84,12 +78,10 @@
             Grid.Row="3"
             Grid.Column="2" 
             x:Name="ClearButton" 
+            Style="{StaticResource ButtonStyle}"
             Click="ClearButton_Click"
-            BorderBrush="Transparent"
-            Opacity="0.85"
             Height="96"
-            Margin="16"
-            HorizontalAlignment="Stretch">
+            Margin="16">
             <Image
                 Source="/Assets/ExplosionIconWhite.png" />
         </Button>
