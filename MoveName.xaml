@@ -5,10 +5,8 @@
     xmlns:local="using:VisualMove"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="110"
-    d:DesignWidth="410">
-    <Border BorderThickness="5">
+    mc:Ignorable="d">
+    <Border BorderThickness="5" Height="110" Width="410" BorderBrush="White">
         <Grid Background="Black">
             <StackPanel>
                 <TextBlock Style="{StaticResource TitleTextStyle}">Enter new moving label</TextBlock>
