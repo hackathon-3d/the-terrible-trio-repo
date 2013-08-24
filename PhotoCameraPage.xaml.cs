@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Windows.Foundation;
@@ -20,9 +19,9 @@ namespace VisualMove
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Gallery : Page
+    public sealed partial class PhotoCameraPage : Page
     {
-        public Gallery()
+        public PhotoCameraPage()
         {
             this.InitializeComponent();
         }
@@ -34,30 +33,6 @@ namespace VisualMove
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-        }
-
-        private void ClearButton_Click(object sender, RoutedEventArgs e)
-        {
-            // May want a messagebox here
-            CurrentBox.Photos.Clear();
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Open Window
-            this.Frame.Navigate(typeof(QRCameraPage), null);
-        }
-
-        private void CameraButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Open Window
-            this.Frame.Navigate(typeof(PhotoCameraPage), null);
-        }
-
-        public Box CurrentBox 
-        {
-            get;
-            set;
         }
     }
 }
