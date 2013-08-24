@@ -164,6 +164,7 @@
     <Content Include="Assets\ThisBoxIsEmptyWhite.png" />
     <Content Include="Assets\TrashCanBlack.png" />
     <Content Include="Assets\TrashCanWhite.png" />
+    <Content Include="Assets\VisualMoveLogoLarge.png" />
     <Content Include="Assets\VisualMoveLogoSmall.png" />
     <Page Include="MoveName.xaml">
       <SubType>Designer</SubType>
