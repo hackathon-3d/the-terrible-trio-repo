@@ -17,9 +17,11 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 using ZXing;
+using ZXing.QrCode;
 
 namespace VisualMove
 {
@@ -80,16 +82,25 @@ namespace VisualMove
         #endregion
 
         #region Event Handlers
-        private void CameraButton_Click(object sender, RoutedEventArgs e)
+        private async void CameraButton_Click(object sender, RoutedEventArgs e)
         {
             Message = "Looking for QR Code";
             Result oQR = null;
 
             while (oQR == null)            
             {
-                //oMediaCapture.Source.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg, )
+                InMemoryRandomAccessStream oPhotoStream = new InMemoryRandomAccessStream();
+                await oMediaCapture.Source.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(),
+                                                                     oPhotoStream);
+
+                WriteableBitmap oBitmap = new WriteableBitmap((int)oMediaCapture.ActualWidth,
+                                                              (int)oMediaCapture.ActualHeight);
+                oBitmap.SetSource(oPhotoStream);
+                BarcodeReader oReader = new BarcodeReader();
+                oQR = oReader.Decode(oBitmap);
             }
-            
+
+            Message = string.Format("Found QR code {0}", oQR.ToString());
         }
 
         private void GalleryButton_Click(object sender, RoutedEventArgs e)
