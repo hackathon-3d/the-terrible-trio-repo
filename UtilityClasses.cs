@@ -25,7 +25,7 @@ namespace VisualMove
         public static Move CurrentMove
         {
             get;
-            set;
+            private set;
         }
 
         public static async Task<Move> FindMove(string sName)
@@ -43,6 +43,8 @@ namespace VisualMove
 
         public static async void LoadFolders()
         {
+            CurrentMove = null;
+            MoveListCollection.Clear();
             IReadOnlyList<StorageFolder> oFolders = await ApplicationData.Current.LocalFolder.GetFoldersAsync();
 
             foreach (StorageFolder oFolder in oFolders)
@@ -91,24 +93,23 @@ namespace VisualMove
             private set;
         }
 
-        public Box CurrentBox = null;
+        public Box CurrentBox;
 
         public Collection<Box> Boxes = new Collection<Box>();
 
         public async void LoadFolders()
         {
-            
+            CurrentBox = null;
+            Boxes.Clear();
             IReadOnlyList<StorageFolder> oFolders = await MoveFolder.GetFoldersAsync();
 
             foreach (StorageFolder oFolder in oFolders)
             {
                 //If a QR code has no images associated, we kill the folder
                 if ((await oFolder.GetFilesAsync()).Count == 0)
-                {
                     await oFolder.DeleteAsync();
-                }
-
-                Boxes.Add(new Box(this, new QRCodeWrapper(oFolder)));
+                else
+                    Boxes.Add(new Box(this, new QRCodeWrapper(oFolder)));
             }
         }
     }

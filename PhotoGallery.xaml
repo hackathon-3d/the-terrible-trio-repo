@@ -27,7 +27,7 @@
             Grid.Row="0"
             Grid.Column="1"
             Height="96"
-            Source="/Assets/VisualMoveLogoSmall.png" />
+            Source="/Assets/PicturesHeaderWhite.png" />
         <FlipView
             Grid.Row="1"
             Grid.ColumnSpan="3"

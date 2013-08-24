@@ -149,6 +149,8 @@
     <Content Include="Assets\ExplosionIconBlack.png" />
     <Content Include="Assets\ExplosionIconWhite.png" />
     <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\MovingVanIconWhite.png" />
+    <Content Include="Assets\PicturesHeaderWhite.png" />
     <Content Include="Assets\QRCameraIconWhite.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
