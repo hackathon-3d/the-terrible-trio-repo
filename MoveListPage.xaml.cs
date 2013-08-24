@@ -35,9 +35,9 @@ namespace VisualMove
         {
         }
       
-        private void AddMoveButton_Click(object sender, RoutedEventArgs e)
+        private async void AddMoveButton_Click(object sender, RoutedEventArgs e)
         {
-            Move oNewMove = new Move();
+            Move oNewMove = await MoveList.FindMove("TempName");
 
             //m_oMoveList.Items.Insert(m_oMoveList.SelectedIndex + 1, oNewMove);
             //MoveList.mov
