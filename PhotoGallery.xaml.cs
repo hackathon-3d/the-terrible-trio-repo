@@ -87,6 +87,7 @@ namespace VisualMove
         {
             // clear existing photos
             m_oFlipView.Items.Clear();
+            m_oImageToFileMapping = new Dictionary<WriteableBitmap, StorageFile>();
 
             // get box folder
             Box oCurrentBox = MoveList.CurrentMove.CurrentBox;
