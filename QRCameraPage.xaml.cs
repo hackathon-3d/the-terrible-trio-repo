@@ -91,7 +91,7 @@ namespace VisualMove
             {
                 Move.FindBox(oQRCodeWrapper);
                 this.Frame.Navigate(typeof(PhotoGallery), null);
-                Message = string.Format("Found QR code {0}", oQR.ToString());
+                //Message = string.Format("Found QR code {0}", oQR.ToString());
             }
         }
         #endregion
