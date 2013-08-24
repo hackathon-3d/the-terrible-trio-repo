@@ -13,7 +13,7 @@ namespace VisualMove
         {
             foreach(Box oBox in Boxes)
             {
-                if (oBox.QRCode == oQRCode) // This WILL NOT WORK. Need to find a compare method in QR code library that will work
+                if (oBox.QRCode.QRCode == oQRCode.QRCode) // This WILL NOT WORK. Need to find a compare method in QR code library that will work
                 {
                     CurrentBox = oBox;
                     return oBox;
@@ -90,8 +90,16 @@ namespace VisualMove
 
     public class QRCodeWrapper
     {
-        public QRCodeWrapper()
-        { }
+        public QRCodeWrapper(string sQRCode)
+        {
+            QRCode = sQRCode;
+        }
+
+        public string QRCode
+        {
+            get;
+            set;
+        }
     }
 
     public class PhotoWrapper

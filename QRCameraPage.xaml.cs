@@ -110,10 +110,13 @@ namespace VisualMove
                 if (oQR == null)
                 {
                     Message = "Could not find QR code";
+
                 }
                 else
                 {
                     Message = string.Format("Found QR code {0}", oQR.ToString());
+                    Move.FindBox(new QRCodeWrapper(oQR.ToString()));
+                    this.Frame.Navigate(typeof(PhotoGallery), null);
                 }
         }
 
