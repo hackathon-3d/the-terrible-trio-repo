@@ -56,8 +56,13 @@ namespace VisualMove
 
         private async void YesDeleteCommandInvokedHandler(IUICommand command)
         {
-            int iIndex = m_oMoveList.SelectedIndex;
-            m_oMoveList.Items.RemoveAt(iIndex);
+            if (m_oMoveList.Items.Count > 0 && m_oMoveList.SelectedIndex != -1)
+            {
+                await MoveList.DeleteCurrentMove();
+                m_oMoveList.ItemsSource = null;
+                m_oMoveList.ItemsSource = MoveList.MoveListCollection;
+                m_oMoveList.SelectedItem = null;
+            }
         }
 
         private void m_oMoveList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -70,6 +75,7 @@ namespace VisualMove
             if (MoveList.CurrentMove != null)
             {
                 Frame.Navigate(typeof(QRCameraPage));
+                //Frame.Navigate(typeof(PhotoGalleryMode3));
             }
         }
     }

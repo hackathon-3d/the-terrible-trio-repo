@@ -74,7 +74,7 @@ namespace VisualMove
                 if (oCurrentBox != null)
                 {
                     StorageFolder oBoxFolder =
-                        await oCurrentBox.AssociatedMove.MoveFolder.GetFolderAsync(MoveList.CurrentMove.CurrentBox.ImageFolder);
+                        await oCurrentBox.AssociatedMove.MoveFolder.GetFolderAsync(oCurrentBox.ImageFolder);
                     IReadOnlyList<StorageFile> oPhotos = await oBoxFolder.GetFilesAsync();
 
                     // if there's an empty list of photos, we can stop the process here and show the empty indicator
