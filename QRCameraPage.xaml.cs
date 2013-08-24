@@ -87,20 +87,34 @@ namespace VisualMove
             Message = "Looking for QR Code";
             Result oQR = null;
 
-            while (oQR == null)            
-            {
+            //while (oQR == null)            
+            //{
                 InMemoryRandomAccessStream oPhotoStream = new InMemoryRandomAccessStream();
                 await oMediaCapture.Source.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(),
                                                                      oPhotoStream);
 
-                WriteableBitmap oBitmap = new WriteableBitmap((int)oMediaCapture.ActualWidth,
-                                                              (int)oMediaCapture.ActualHeight);
+                WriteableBitmap oBitmap = new WriteableBitmap(1, 1);
+                oPhotoStream.Seek(0);
                 oBitmap.SetSource(oPhotoStream);
-                BarcodeReader oReader = new BarcodeReader();
-                oQR = oReader.Decode(oBitmap);
-            }
+                oBitmap = new WriteableBitmap(oBitmap.PixelWidth, oBitmap.PixelHeight);
+                oPhotoStream.Seek(0);
+                oBitmap.SetSource(oPhotoStream);
 
-            Message = string.Format("Found QR code {0}", oQR.ToString());
+                BarcodeReader oReader = new BarcodeReader();
+                oReader.Options.TryHarder = true;
+                oReader.AutoRotate = true;
+
+                oQR = oReader.Decode(oBitmap);
+            //}
+
+                if (oQR == null)
+                {
+                    Message = "Could not find QR code";
+                }
+                else
+                {
+                    Message = string.Format("Found QR code {0}", oQR.ToString());
+                }
         }
 
         private void GalleryButton_Click(object sender, RoutedEventArgs e)
@@ -110,10 +124,16 @@ namespace VisualMove
         #endregion
 
         #region Properties
-        public string Message
+        private string Message
         {
-            get;
-            private set;
+            get
+            {
+                return m_oTextMessage.Text;
+            }
+            set
+            {
+                m_oTextMessage.Text = value;
+            }
         }
 
         private DeviceInformation Camera
