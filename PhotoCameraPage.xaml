@@ -30,6 +30,7 @@
             Grid.Row="1"
             Grid.Column="0"
             Height="128"
+            Margin="32"
             Style="{StaticResource ButtonStyle}"
             HorizontalAlignment="Left"
             Click="BackButton_Click" 
@@ -41,6 +42,7 @@
             Grid.Row="1"
             Grid.Column="1"
             Height="128"
+            Margin="32"
             Style="{StaticResource ButtonStyle}"
             Click="CameraButton_Click">
             <Image

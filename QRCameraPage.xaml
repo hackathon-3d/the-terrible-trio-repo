@@ -28,6 +28,14 @@
             Grid.RowSpan="3"
             Grid.ColumnSpan="3"
             x:Name="oMediaCapture" />
+        <Canvas
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            Grid.ColumnSpan="3"
+            Background="Transparent"
+            Width="1280"
+            Height="720"
+            x:Name="DrawingCanvas" />
         <TextBlock 
             Grid.Row="1"
             Grid.Column="1" 
@@ -38,6 +46,7 @@
             Grid.Row="2"
             Grid.Column="0"
             Height="128"
+            Margin="32"
             Style="{StaticResource ButtonStyle}"
             HorizontalAlignment="Left"
             Click="BackButton_Click">
@@ -48,8 +57,10 @@
             Grid.Row="2"
             Grid.Column="1"
             Height="128"
+            Margin="32"
             Style="{StaticResource ButtonStyle}"
-            Click="CameraButton_Click">
+            Click="CameraButton_Click"
+            Visibility="Collapsed">
             <Image
                 Source="/Assets/CameraIconWhite.png" />
         </Button>
