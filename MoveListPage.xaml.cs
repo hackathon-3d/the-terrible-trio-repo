@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -46,24 +47,30 @@ namespace VisualMove
         {
             if (m_oMoveList.Items.Count > 0 && m_oMoveList.SelectedIndex != -1)
             {
-                //int iIndex = m_oMoveList.SelectedIndex;
-                //m_oMoveList.Items.RemoveAt(iIndex);
-                //m_oRegressionProfile.Configs.RemoveAt(iIndex);
-                //if (iIndex > 0)
-                //{
-                //    m_oRegressionListView.SelectedItem = m_oRegressionListView.Items[iIndex - 1];
-                //}
-                //else if (iIndex == 0 && m_oRegressionListView.Items.Count > 0)
-                //{
-                //    m_oRegressionListView.SelectedItem = m_oRegressionListView.Items[0];
-                //}
+                MessageDialog oDialog = new MessageDialog("Are you sure you want to delete this move?");
+                oDialog.Commands.Add(new UICommand("Yes", YesDeleteCommandInvokedHandler));
+                oDialog.Commands.Add(new UICommand("No"));
+                await oDialog.ShowAsync();
             }
+        }
+
+        private async void YesDeleteCommandInvokedHandler(IUICommand command)
+        {
+            int iIndex = m_oMoveList.SelectedIndex;
+            m_oMoveList.Items.RemoveAt(iIndex);
         }
 
         private void m_oMoveList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MoveList.CurrentMove = m_oMoveList.SelectedItem as Move;
-            Frame.Navigate(typeof(QRCameraPage));
+        }
+
+        private void ScanButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MoveList.CurrentMove != null)
+            {
+                Frame.Navigate(typeof(QRCameraPage));
+            }
         }
     }
 }

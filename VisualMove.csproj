@@ -156,6 +156,7 @@
     <Content Include="Assets\PicturesHeaderWhite.png" />
     <Content Include="Assets\QRCameraIconWhite.png" />
     <Content Include="Assets\QRCodeMessage.png" />
+    <Content Include="Assets\ScanText.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-140.png" />

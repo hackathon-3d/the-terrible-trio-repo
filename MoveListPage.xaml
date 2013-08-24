@@ -44,7 +44,7 @@
             VerticalAlignment="Stretch"
             Grid.Row="1"
             Grid.ColumnSpan="2">
-            <Border Width="760" Margin="20" Padding="5" BorderThickness="5" BorderBrush="White" CornerRadius="20" Background="DarkRed">
+            <Border Width="720" Height="480" Margin="20" Padding="5" BorderThickness="5" BorderBrush="White" CornerRadius="20" Background="DarkRed">
                 <ScrollViewer
                     Width="750"
                     Height="550"
@@ -65,5 +65,16 @@
                 </ScrollViewer>
             </Border>
         </StackPanel>
+        <Button
+            Grid.Row="2"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Margin="0,0,0,28"
+            Height="70"
+            Click="ScanButton_Click">
+            <Image
+                Source="/Assets/ScanText.png" />
+        </Button>
     </Grid>
 </Page>
