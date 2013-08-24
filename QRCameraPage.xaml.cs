@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+
 using Windows.ApplicationModel.Activation;
 using Windows.Devices.Enumeration;
 using Windows.Foundation;
@@ -15,7 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+using ZXing;
 
 namespace VisualMove
 {
@@ -35,6 +37,8 @@ namespace VisualMove
         #region Constructors
         public QRCameraPage()
         {
+            DataContext = this;
+
             this.InitializeComponent();
         }
         #endregion
@@ -48,7 +52,7 @@ namespace VisualMove
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             DeviceInformationCollection oCameras = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
-            switch(oCameras.Count)
+            switch (oCameras.Count)
             {
                 case 0:
                     throw new Exception("No cameras found");
@@ -57,33 +61,28 @@ namespace VisualMove
                     Camera = oCameras[(int)CameraLocation.Front];
                     break;
                 default:
+                    //By default, we want the back camera
                     Camera = oCameras[(int)CameraLocation.Back];
                     break;
-            }
-        }
-
-        #endregion
-
-        #region Event Handlers
-        private async void CaptureElement_Loaded(object sender, RoutedEventArgs e)
-        {
-            CaptureElement oMediaCapture = sender as CaptureElement;
-            if (oMediaCapture == null)
-            {
-                throw new Exception("Event isn't tied to a capture element (and it really should be");
             }
 
             MediaCaptureInitializationSettings oCameraSettings = new MediaCaptureInitializationSettings();
             oCameraSettings.VideoDeviceId = Camera.Id;
 
-            oMediaCapture.Source = new MediaCapture();
-            await oMediaCapture.Source.InitializeAsync(oCameraSettings);
+            MediaCapture oCamera = new MediaCapture();
+            await oCamera.InitializeAsync(oCameraSettings);
+            oMediaCapture.Source = oCamera;
             await oMediaCapture.Source.StartPreviewAsync();
         }
 
+        #endregion
+
+        #region Event Handlers
         private void CameraButton_Click(object sender, RoutedEventArgs e)
         {
+            Message = "Looking for QR Code";
 
+            
         }
 
         private void GalleryButton_Click(object sender, RoutedEventArgs e)
@@ -93,6 +92,12 @@ namespace VisualMove
         #endregion
 
         #region Properties
+        public string Message
+        {
+            get;
+            private set;
+        }
+
         private DeviceInformation Camera
         {
             get;
