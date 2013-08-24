@@ -9,6 +9,8 @@ using Windows.Devices.Enumeration;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.Capture;
+using Windows.Media.MediaProperties;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -81,7 +83,12 @@ namespace VisualMove
         private void CameraButton_Click(object sender, RoutedEventArgs e)
         {
             Message = "Looking for QR Code";
+            Result oQR = null;
 
+            while (oQR == null)            
+            {
+                //oMediaCapture.Source.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg, )
+            }
             
         }
 
