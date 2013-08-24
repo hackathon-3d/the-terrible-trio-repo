@@ -5,28 +5,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Windows.Storage;
+
 namespace VisualMove
 {
     public static class Move
     {
-        public static Box FindBox(QRCodeWrapper oQRCode)
+        public static async Task<Box> FindBox(QRCodeWrapper oQRCode)
         {
-            foreach(Box oBox in Boxes)
+            CurrentBox = Boxes.FirstOrDefault(oBox => oBox.QRCode == oQRCode);
+            if (CurrentBox == null)
             {
-                if (oBox.QRCode.QRCode == oQRCode.QRCode) // This WILL NOT WORK. Need to find a compare method in QR code library that will work
-                {
-                    CurrentBox = oBox;
-                    return oBox;
-                }
+                CurrentBox = new Box(oQRCode);
+                await ApplicationData.Current.LocalFolder.CreateFolderAsync(CurrentBox.ImageFolder);
+                Boxes.Add(CurrentBox);
             }
-            CurrentBox = new Box(oQRCode);
-            Boxes.Add(CurrentBox);
+
             return CurrentBox;
         }
 
         public static Box CurrentBox = null;
 
         public static Collection<Box> Boxes = new Collection<Box>();
+
+        public static async void LoadFolders()
+        {
+            IReadOnlyList<StorageFolder> oFolders = await ApplicationData.Current.LocalFolder.GetFoldersAsync();
+
+            foreach (StorageFolder oFolder in oFolders)
+            {
+                Boxes.Add(new Box(new QRCodeWrapper(oFolder.Name)));
+            }
+        }
     }
 
     public class Box
@@ -52,7 +62,7 @@ namespace VisualMove
         {
             get
             {
-                return QRCode.QRCode.GetHashCode().ToString();
+                return QRCode.QRCode;
             }
         }
 
@@ -96,19 +106,50 @@ namespace VisualMove
             get;
             set;
         }
+
+        public override bool Equals(object obj)
+        {
+            Box oBox = obj as Box;
+            if (oBox == null)
+                return false;
+
+            return oBox.QRCode == QRCode;
+        }
+
+        public override int GetHashCode()
+        {
+            return QRCode.GetHashCode();
+        }
     }
 
     public class QRCodeWrapper
     {
+        private int m_nCodeHash;
+
         public QRCodeWrapper(string sQRCode)
         {
-            QRCode = sQRCode;
+            m_nCodeHash = sQRCode.GetHashCode();
+            QRCode = m_nCodeHash.ToString();
         }
 
         public string QRCode
         {
             get;
             set;
+        }
+
+        public override bool Equals(object obj)
+        {
+            QRCodeWrapper oQRCodeWrapper = obj as QRCodeWrapper;
+            if (oQRCodeWrapper == null)
+                return false;
+
+            return oQRCodeWrapper.QRCode == QRCode;
+        }
+
+        public override int GetHashCode()
+        {
+            return m_nCodeHash;
         }
     }
 
