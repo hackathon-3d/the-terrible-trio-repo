@@ -34,7 +34,7 @@ namespace VisualMove
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             await MoveList.LoadFolders();
-            m_oMoveList.ItemsSource = MoveList.MoveListCollection.Select(oMove => oMove.Name);
+            m_oMoveList.ItemsSource = MoveList.MoveListCollection;
         }
       
         private void AddMoveButton_Click(object sender, RoutedEventArgs e)
