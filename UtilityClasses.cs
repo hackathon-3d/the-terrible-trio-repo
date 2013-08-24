@@ -43,6 +43,7 @@ namespace VisualMove
 
         public static async void LoadFolders()
         {
+            MoveListCollection.Clear();
             IReadOnlyList<StorageFolder> oFolders = await ApplicationData.Current.LocalFolder.GetFoldersAsync();
 
             foreach (StorageFolder oFolder in oFolders)
@@ -97,7 +98,7 @@ namespace VisualMove
 
         public async void LoadFolders()
         {
-            
+            Boxes.Clear();
             IReadOnlyList<StorageFolder> oFolders = await MoveFolder.GetFoldersAsync();
 
             foreach (StorageFolder oFolder in oFolders)
