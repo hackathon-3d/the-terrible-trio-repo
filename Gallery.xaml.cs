@@ -77,7 +77,7 @@ namespace VisualMove
             // Open Window
         }
 
-        public Camera Camera
+        public CameraPage Camera
         {
             get;
             set;

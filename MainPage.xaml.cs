@@ -33,7 +33,7 @@ namespace VisualMove
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Camera oCamera = new Camera();
+            CameraPage oCamera = new CameraPage();
             Gallery oGallery = new Gallery();
             Move oMove = new Move();
 
@@ -44,6 +44,13 @@ namespace VisualMove
 
             oCamera.Visibility = Visibility.Visible;
             oGallery.Visibility = Visibility.Collapsed;
+        }
+
+        protected override void OnTapped(TappedRoutedEventArgs e)
+        {
+            base.OnTapped(e);
+
+            this.Frame.Navigate(typeof(CameraPage), null);
         }
     }
 }
