@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="ee046300-679a-43f1-8a17-6b865ee92519" Publisher="CN=whgoss" Version="1.0.0.3" />
+  <Identity Name="ee046300-679a-43f1-8a17-6b865ee92519" Publisher="CN=whgoss" Version="1.0.0.0" />
   <Properties>
     <DisplayName>VisualMove</DisplayName>
     <PublisherDisplayName>whgoss</PublisherDisplayName>

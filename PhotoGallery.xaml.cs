@@ -6,6 +6,7 @@ using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
@@ -86,7 +87,6 @@ namespace VisualMove
         {
             // clear existing photos
             m_oFlipView.Items.Clear();
-            //Photos = new ObservableCollection<WriteableBitmap>();
 
             // get box folder
             Box oCurrentBox = Move.CurrentBox;
@@ -109,7 +109,6 @@ namespace VisualMove
                         oBitmap.SetSource(oPhotoStream);
 
                         // add photo
-                        //Photos.Add(oBitmap);
                         m_oFlipView.Items.Add(oBitmap);
                         m_oImageToFileMapping.Add(oBitmap, oPhoto);
                     }

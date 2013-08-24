@@ -31,7 +31,15 @@
         <FlipView
             Grid.Row="1"
             Grid.ColumnSpan="3"
-            x:Name="m_oFlipView" />
+            x:Name="m_oFlipView">
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <Image 
+                        Source="{Binding}" 
+                        Stretch="UniformToFill" />
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
         <Button 
             Grid.Row="0"
             Grid.Column="0"
