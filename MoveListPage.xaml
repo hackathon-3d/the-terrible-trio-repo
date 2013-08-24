@@ -6,13 +6,41 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel Orientation="Horizontal">
-            <Button Name="AddMove" Content="Add New Move" Click="AddMoveButton_Click"/>
-            <Button Name="DeleteMove" Content="Delete Move" Click="DeleteMoveButton_Click"/>
-        </StackPanel>
-        <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="*" />
+        </Grid.RowDefinitions>
+        <Image
+            Grid.Row="0"
+            Grid.Column="1"
+            Height="96"
+            Source="/Assets/VisualMoveLogoSmall.png" />
+        <Button
+            Name="AddMove"
+            Height="80"
+            Style="{StaticResource ButtonStyle}"
+            HorizontalAlignment="Right"
+            Click="AddMoveButton_Click">
+            <Image
+                Source="/Assets/MovingVanIconWhite.png" />
+        </Button>
+        <Button 
+            Grid.Row="0"
+            Grid.Column="0"
+            Name="DeleteMove" 
+            Height="80"
+            Style="{StaticResource ButtonStyle}"
+            HorizontalAlignment="Left"
+            Click="DeleteMoveButton_Click">
+            <Image
+                Source="/Assets/TrashCanWhite.png" />
+        </Button>
+        <StackPanel
+            Grid.Row="1"
+            Grid.ColumnSpan="2">
             <ListView
                 Height="300"
                 Name="m_oMoveList">
