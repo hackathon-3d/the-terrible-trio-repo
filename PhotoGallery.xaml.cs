@@ -45,6 +45,11 @@ namespace VisualMove
 
         private async void ClearButton_Click(object sender, RoutedEventArgs e)
         {
+            if (m_oFlipView.Items.Count <= 0)
+            {
+                return;
+            }
+
             MessageDialog oDialog = new MessageDialog("Are you sure you want to empty this entire box?");
             oDialog.Commands.Add(new UICommand("Yes", YesClearCommandInvokedHandler));
             oDialog.Commands.Add(new UICommand("No"));
@@ -65,6 +70,11 @@ namespace VisualMove
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            if (m_oFlipView.SelectedItem == null)
+            {
+                return;
+            }
+
             MessageDialog oDialog = new MessageDialog("Are you sure you want to delete this picture?");
             oDialog.Commands.Add(new UICommand("Yes", YesDeleteCommandInvokedHandler));
             oDialog.Commands.Add(new UICommand("No"));
