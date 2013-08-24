@@ -12,6 +12,7 @@ using Windows.Foundation.Collections;
 using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Storage.Streams;
+using Windows.System.Threading;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -104,22 +105,13 @@ namespace VisualMove
             // begin video preview
             oMediaCapture.Source = oCamera;
             await oMediaCapture.Source.StartPreviewAsync();
-        }
 
-        #endregion
-
-        #region Event Handlers
-
-        private async void CameraButton_Click(object sender, RoutedEventArgs e)
-        {
-            Message = "Looking for QR Code";
             Result oQR = null;
-
-            //while (oQR == null)            
-            //{
+            while (oQR == null)
+            {
                 InMemoryRandomAccessStream oPhotoStream = new InMemoryRandomAccessStream();
                 await oMediaCapture.Source.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(),
-                                                                     oPhotoStream);
+                                                                        oPhotoStream);
 
                 WriteableBitmap oBitmap = new WriteableBitmap(1, 1);
                 oPhotoStream.Seek(0);
@@ -133,25 +125,22 @@ namespace VisualMove
                 oReader.AutoRotate = true;
 
                 oQR = oReader.Decode(oBitmap);
-            //}
+            }
 
-                if (oQR == null)
-                {
-                    Message = "Could not find QR code";
+            if (oQR != null)
+            {
+                Message = string.Format("Found QR code {0}", oQR.ToString());
+                await MoveList.CurrentMove.FindBox(new QRCodeWrapper(oQR.ToString()));
+                this.Frame.Navigate(typeof(PhotoGallery), null);
+            }
+        }
 
-                }
-                else
-                {
-                    Message = string.Format("Found QR code {0}", oQR.ToString());
-                    await MoveList.CurrentMove.FindBox(new QRCodeWrapper(oQR.ToString()));
-                    this.Frame.Navigate(typeof(PhotoGallery), null);
-                }
+        #endregion
 
-            // let's refresh the message after a few seconds
-            DispatcherTimer oRefreshTimer = new DispatcherTimer();
-            oRefreshTimer.Tick += oRefreshTimer_Tick;
-            oRefreshTimer.Interval = new TimeSpan(0, 0, REFRESH_TIMER_INTERVAL);
-            oRefreshTimer.Start();
+        #region Event Handlers
+        private void CameraButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
 
         void oRefreshTimer_Tick(object sender, object e)
