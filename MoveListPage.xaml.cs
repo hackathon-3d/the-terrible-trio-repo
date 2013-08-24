@@ -46,6 +46,10 @@ namespace VisualMove
         {
             if (m_oMoveList.Items.Count > 0 && m_oMoveList.SelectedIndex != -1)
             {
+                //MoveList.MoveListCollection.Remove(MoveList.CurrentMove);
+                //m_oMoveList.Items.Clear();
+                // m_oMoveList.Items = MoveList.MoveListCollection;
+                //MoveList.CurrentMove = m_oMoveList.SelectedItem as Move;
                 //int iIndex = m_oMoveList.SelectedIndex;
                 //m_oMoveList.Items.RemoveAt(iIndex);
                 //m_oRegressionProfile.Configs.RemoveAt(iIndex);
@@ -63,7 +67,7 @@ namespace VisualMove
         private void m_oMoveList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MoveList.CurrentMove = m_oMoveList.SelectedItem as Move;
-            Frame.Navigate(typeof(QRCameraPage));
+            //Frame.Navigate(typeof(QRCameraPage));
         }
     }
 }

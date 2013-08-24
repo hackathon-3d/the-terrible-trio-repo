@@ -44,7 +44,7 @@
             VerticalAlignment="Stretch"
             Grid.Row="1"
             Grid.ColumnSpan="2">
-            <Border Width="760" Padding="5" BorderThickness="5" BorderBrush="White" CornerRadius="20">
+            <Border Width="760" Padding="5" BorderThickness="5" BorderBrush="White" CornerRadius="20" Background="DarkRed">
                 <ScrollViewer
                     Width="750"
                     Height="570"
@@ -52,6 +52,15 @@
                     VerticalScrollBarVisibility="Auto">
                     <ListView
                         Name="m_oMoveList" FontSize="48" SelectionChanged="m_oMoveList_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="2" BorderBrush="White" CornerRadius="5">
+                                    <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                        <TextBlock FontSize="28" Text="This is something here!" HorizontalAlignment="Stretch"></TextBlock>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                     </ListView>
                 </ScrollViewer>
             </Border>
