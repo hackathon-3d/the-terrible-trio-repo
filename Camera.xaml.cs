@@ -17,7 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+using ZXing;
 
 namespace VisualMove
 {
@@ -37,6 +37,8 @@ namespace VisualMove
         #region Constructors
         public CameraPage()
         {
+            DataContext = this;
+
             this.InitializeComponent();
         }
         #endregion
@@ -59,6 +61,7 @@ namespace VisualMove
                     Camera = oCameras[(int)CameraLocation.Front];
                     break;
                 default:
+                    //By default, we want the back camera
                     Camera = oCameras[(int)CameraLocation.Back];
                     break;
             }
@@ -77,7 +80,9 @@ namespace VisualMove
         #region Event Handlers
         private void CameraButton_Click(object sender, RoutedEventArgs e)
         {
+            Message = "Looking for QR Code";
 
+            
         }
 
         private void GalleryButton_Click(object sender, RoutedEventArgs e)
@@ -87,6 +92,12 @@ namespace VisualMove
         #endregion
 
         #region Properties
+        public string Message
+        {
+            get;
+            private set;
+        }
+
         private DeviceInformation Camera
         {
             get;
