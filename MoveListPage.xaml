@@ -41,10 +41,16 @@
         <StackPanel
             Grid.Row="1"
             Grid.ColumnSpan="2">
-            <ListView
-                Height="300"
-                Name="m_oMoveList">
-            </ListView>
+            <ScrollViewer
+                VerticalAlignment="Stretch"
+                HorizontalScrollBarVisibility="Hidden"
+                VerticalScrollBarVisibility="Visible">
+                <GridView
+                    Height="300"
+                    Name="m_oMoveList">
+                
+                </GridView>
+            </ScrollViewer>
         </StackPanel>
     </Grid>
 </Page>

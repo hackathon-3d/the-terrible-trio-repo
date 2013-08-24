@@ -34,36 +34,35 @@ namespace VisualMove
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
-
-        //Popup myPopup;
-        //myPopup.Child = new CustomUserControl();
-        //myPopup.IsOpen = true;
       
         private async void AddMoveButton_Click(object sender, RoutedEventArgs e)
         {
-            Move oNewMove = await MoveList.FindMove("TempName");
+            Popup MoveNameControl = new Popup();
+            MoveNameControl.Child = new MoveName();
+            MoveNameControl.IsOpen = true;
+             
+            Move oNewMove = await MoveList.FindMove((MoveNameControl.Child as MoveName).MoveNameString);
 
-            //m_oMoveList.Items.Insert(m_oMoveList.SelectedIndex + 1, oNewMove);
-            //MoveList.mov
-            //m_oRegressionListView.SelectedItem = oNewRegressionResultsBin;
+            m_oMoveList.Items.Add(oNewMove);
+            m_oMoveList.SelectedItem = oNewMove;
         }
 
         private void DeleteMoveButton_Click(object sender, RoutedEventArgs e)
         {
-            //if (m_oRegressionListView.Items.Count > 0 && m_oRegressionListView.SelectedIndex != -1)
-            //{
-            //    int iIndex = m_oRegressionListView.SelectedIndex;
-            //    m_oRegressionListView.Items.RemoveAt(iIndex);
-            //    m_oRegressionProfile.Configs.RemoveAt(iIndex);
-            //    if (iIndex > 0)
-            //    {
-            //        m_oRegressionListView.SelectedItem = m_oRegressionListView.Items[iIndex - 1];
-            //    }
-            //    else if (iIndex == 0 && m_oRegressionListView.Items.Count > 0)
-            //    {
-            //        m_oRegressionListView.SelectedItem = m_oRegressionListView.Items[0];
-            //    }
-            //}
+            if (m_oMoveList.Items.Count > 0 && m_oMoveList.SelectedIndex != -1)
+            {
+                //int iIndex = m_oMoveList.SelectedIndex;
+                //m_oMoveList.Items.RemoveAt(iIndex);
+                //m_oRegressionProfile.Configs.RemoveAt(iIndex);
+                //if (iIndex > 0)
+                //{
+                //    m_oRegressionListView.SelectedItem = m_oRegressionListView.Items[iIndex - 1];
+                //}
+                //else if (iIndex == 0 && m_oRegressionListView.Items.Count > 0)
+                //{
+                //    m_oRegressionListView.SelectedItem = m_oRegressionListView.Items[0];
+                //}
+            }
         }
     }
 }
