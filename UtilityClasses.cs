@@ -20,6 +20,7 @@ namespace VisualMove
                 }
             }
             CurrentBox = new Box(oQRCode);
+            Boxes.Add(CurrentBox);
             return CurrentBox;
         }
 
