@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -44,15 +45,10 @@ namespace VisualMove
 
         private async void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-            if (m_oImageToFileMapping != null)
-            {
-                foreach (StorageFile oPhoto in m_oImageToFileMapping.Values)
-                {
-                    await oPhoto.DeleteAsync();
-                }
-            }
-
-            m_oFlipView.Items.Clear();
+            MessageDialog oDialog = new MessageDialog("Are you sure you want to empty this entire box?");
+            oDialog.Commands.Add(new UICommand("Yes", YesClearCommandInvokedHandler));
+            oDialog.Commands.Add(new UICommand("No"));
+            await oDialog.ShowAsync();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -69,6 +65,14 @@ namespace VisualMove
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            MessageDialog oDialog = new MessageDialog("Are you sure you want to delete this picture?");
+            oDialog.Commands.Add(new UICommand("Yes", YesDeleteCommandInvokedHandler));
+            oDialog.Commands.Add(new UICommand("No"));
+            await oDialog.ShowAsync();
+        }
+
+        async void YesDeleteCommandInvokedHandler(IUICommand command)
+        {
             if (m_oImageToFileMapping != null)
             {
                 WriteableBitmap oPhoto = m_oFlipView.SelectedItem as WriteableBitmap;
@@ -76,12 +80,37 @@ namespace VisualMove
                 {
                     await m_oImageToFileMapping[oPhoto].DeleteAsync();
                     m_oFlipView.Items.Remove(oPhoto);
-                    m_oImageToFileMapping.Remove(oPhoto);
+
+                    m_oFlipView.UpdateLayout();
+
+                    // if the mapping is now empty, show the empty box indicator
+                    if (m_oImageToFileMapping.Count <= 0)
+                    {
+                        EmptyBoxIndicator.Visibility = Visibility.Visible;
+                    }
                 }
             }
         }
 
+        async void YesClearCommandInvokedHandler(IUICommand command)
+        {
+            if (m_oImageToFileMapping != null)
+            {
+                foreach (StorageFile oPhoto in m_oImageToFileMapping.Values)
+                {
+                    await oPhoto.DeleteAsync();
+                }
+            }
+
+            m_oFlipView.Items.Clear();
+            m_oFlipView.UpdateLayout();
+
+            EmptyBoxIndicator.Visibility = Visibility.Visible;
+        }
+
         #endregion
+
+        #region Functions
 
         private async void LoadPhotos()
         {
@@ -131,5 +160,7 @@ namespace VisualMove
                 EmptyBoxIndicator.Visibility = Visibility.Visible;
             }
         }
+
+        #endregion
     }
 }
