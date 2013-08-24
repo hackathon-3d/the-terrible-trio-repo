@@ -54,6 +54,15 @@ namespace VisualMove
                 oMove.LoadFolders();
             }
         }
+
+        public static async Task DeleteCurrentMove()
+        {
+            if (CurrentMove != null)
+            {
+                await CurrentMove.MoveFolder.DeleteAsync();
+                MoveListCollection.Remove(CurrentMove);
+            }
+        }
     }
 
     public class Move
