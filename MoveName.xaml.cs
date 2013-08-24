@@ -22,5 +22,17 @@ namespace VisualMove
         {
             this.InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MoveNameString = m_oMoveName.Text;
+            this.Visibility = Visibility.Collapsed;
+        }
+
+        public string MoveNameString
+        {
+            get;
+            set;
+        }
     }
 }
