@@ -45,11 +45,9 @@
                 VerticalAlignment="Stretch"
                 HorizontalScrollBarVisibility="Hidden"
                 VerticalScrollBarVisibility="Visible">
-                <GridView
+                <ListView
                     Height="300"
-                    Name="m_oMoveList">
-                
-                </GridView>
+                    Name="m_oMoveList" FontSize="48" SelectionChanged="m_oMoveList_SelectionChanged"/>
             </ScrollViewer>
         </StackPanel>
     </Grid>

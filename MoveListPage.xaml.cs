@@ -31,20 +31,15 @@ namespace VisualMove
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.  The Parameter
         /// property is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            await MoveList.LoadFolders();
+            m_oMoveList.ItemsSource = MoveList.MoveListCollection.Select(oMove => oMove.Name);
         }
       
-        private async void AddMoveButton_Click(object sender, RoutedEventArgs e)
+        private void AddMoveButton_Click(object sender, RoutedEventArgs e)
         {
-            Popup MoveNameControl = new Popup();
-            MoveNameControl.Child = new MoveName();
-            MoveNameControl.IsOpen = true;
-             
-            Move oNewMove = await MoveList.FindMove((MoveNameControl.Child as MoveName).MoveNameString);
-
-            m_oMoveList.Items.Add(oNewMove);
-            m_oMoveList.SelectedItem = oNewMove;
+            Frame.Navigate(typeof(MoveName));
         }
 
         private void DeleteMoveButton_Click(object sender, RoutedEventArgs e)
@@ -63,6 +58,12 @@ namespace VisualMove
                 //    m_oRegressionListView.SelectedItem = m_oRegressionListView.Items[0];
                 //}
             }
+        }
+
+        private void m_oMoveList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MoveList.CurrentMove = m_oMoveList.SelectedItem as Move;
+            Frame.Navigate(typeof(QRCameraPage));
         }
     }
 }

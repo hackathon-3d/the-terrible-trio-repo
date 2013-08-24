@@ -25,7 +25,7 @@ namespace VisualMove
         public static Move CurrentMove
         {
             get;
-            private set;
+            set;
         }
 
         public static async Task<Move> FindMove(string sName)
@@ -41,7 +41,7 @@ namespace VisualMove
             return CurrentMove;
         }
 
-        public static async void LoadFolders()
+        public static async Task LoadFolders()
         {
             CurrentMove = null;
             MoveListCollection.Clear();
@@ -53,9 +53,6 @@ namespace VisualMove
                 MoveListCollection.Add(oMove);
                 oMove.LoadFolders();
             }
-
-            //TODO:  Remove this:
-            CurrentMove = await MoveList.FindMove("TempMove");
         }
     }
 
@@ -111,6 +108,11 @@ namespace VisualMove
                 else
                     Boxes.Add(new Box(this, new QRCodeWrapper(oFolder)));
             }
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 
