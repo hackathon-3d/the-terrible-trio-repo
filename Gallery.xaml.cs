@@ -39,13 +39,14 @@ namespace VisualMove
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             // May want a messagebox here
-            CurrentBox.Photos.Clear();
+            DisplayMessageBox("Clear all photos for this box?", "Confirm Clear");
+            Move.CurrentBox.Photos.Clear();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             // Open Window
-            this.Frame.Navigate(typeof(QRCameraPage), null);
+            this.Frame.GoBack();
         }
 
         private void CameraButton_Click(object sender, RoutedEventArgs e)
@@ -54,10 +55,11 @@ namespace VisualMove
             this.Frame.Navigate(typeof(PhotoCameraPage), null);
         }
 
-        public Box CurrentBox 
+        protected async void DisplayMessageBox(string sMessage, string sTitle)
         {
-            get;
-            set;
+            var oMessageDialog = new Windows.UI.Popups.MessageDialog(sMessage, sTitle);
+            oMessageDialog.DefaultCommandIndex = 1;
+            await oMessageDialog.ShowAsync();
         }
     }
 }
