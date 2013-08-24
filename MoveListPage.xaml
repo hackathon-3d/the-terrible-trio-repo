@@ -49,12 +49,12 @@
                     Width="750"
                     Height="570"
                     HorizontalScrollBarVisibility="Hidden"
-                    VerticalScrollBarVisibility="Auto">
+                    VerticalScrollBarVisibility="Visible">
                     <ListView
                         Name="m_oMoveList" FontSize="48" SelectionChanged="m_oMoveList_SelectionChanged">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderThickness="2" BorderBrush="White" CornerRadius="5">
+                                <Border BorderThickness="2" BorderBrush="White" CornerRadius="5" Width="720">
                                     <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Stretch">
                                         <TextBlock FontSize="28" Text="This is something here!" HorizontalAlignment="Stretch"></TextBlock>
                                     </StackPanel>

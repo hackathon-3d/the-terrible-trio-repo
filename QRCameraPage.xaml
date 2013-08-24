@@ -20,6 +20,11 @@
         <CaptureElement
             Grid.RowSpan="2"
             x:Name="oMediaCapture" />
+        <Rectangle
+            Grid.ColumnSpan="3"
+            Grid.Row="2"
+            Fill="Black"
+            Opacity="0.75" />
         <TextBlock 
             Grid.Row="2"
             FontSize="24"
