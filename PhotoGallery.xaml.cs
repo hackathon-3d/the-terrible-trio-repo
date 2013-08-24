@@ -97,23 +97,38 @@ namespace VisualMove
                     await MoveList.CurrentMove.MoveFolder.GetFolderAsync(MoveList.CurrentMove.CurrentBox.ImageFolder);
                 IReadOnlyList<StorageFile> oPhotos = await oBoxFolder.GetFilesAsync();
 
-                // iterate through folder and load each photo
-                foreach (StorageFile oPhoto in oPhotos)
+                // if there's an empty list of photos, we can stop the process here and show the empty indicator
+                if (oPhotos.Count <= 0)
                 {
-                    using (IRandomAccessStream oPhotoStream = await oPhoto.OpenReadAsync())
-                    {
-                        WriteableBitmap oBitmap = new WriteableBitmap(1, 1);
-                        oPhotoStream.Seek(0);
-                        oBitmap.SetSource(oPhotoStream);
-                        oBitmap = new WriteableBitmap(oBitmap.PixelWidth, oBitmap.PixelHeight);
-                        oPhotoStream.Seek(0);
-                        oBitmap.SetSource(oPhotoStream);
-
-                        // add photo
-                        m_oFlipView.Items.Add(oBitmap);
-                        m_oImageToFileMapping.Add(oBitmap, oPhoto);
-                    }
+                    EmptyBoxIndicator.Visibility = Visibility.Visible;
                 }
+                else
+                {
+                    // iterate through folder and load each photo
+                    foreach (StorageFile oPhoto in oPhotos)
+                    {
+                        using (IRandomAccessStream oPhotoStream = await oPhoto.OpenReadAsync())
+                        {
+                            WriteableBitmap oBitmap = new WriteableBitmap(1, 1);
+                            oPhotoStream.Seek(0);
+                            oBitmap.SetSource(oPhotoStream);
+                            oBitmap = new WriteableBitmap(oBitmap.PixelWidth, oBitmap.PixelHeight);
+                            oPhotoStream.Seek(0);
+                            oBitmap.SetSource(oPhotoStream);
+
+                            // add photo
+                            m_oFlipView.Items.Add(oBitmap);
+                            m_oImageToFileMapping.Add(oBitmap, oPhoto);
+                        }
+                    }
+
+                    // hide the empty box indicator
+                    EmptyBoxIndicator.Visibility = Visibility.Collapsed;
+                }
+            }
+            else
+            {
+                EmptyBoxIndicator.Visibility = Visibility.Visible;
             }
         }
     }

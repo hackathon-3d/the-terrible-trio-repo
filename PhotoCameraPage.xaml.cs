@@ -122,14 +122,16 @@ namespace VisualMove
 
             // flash timer
             DispatcherTimer oFlashTimer = new DispatcherTimer();
-            oFlashTimer.Interval = new TimeSpan(0, 0, FLASH_TIMER_INTERVAL);
+            oFlashTimer.Interval = new TimeSpan(0, 0, 0, 0, FLASH_TIMER_INTERVAL);
             oFlashTimer.Tick += oFlashTimer_Tick;
             oFlashTimer.Start();
         }
 
         void oFlashTimer_Tick(object sender, object e)
         {
+            DispatcherTimer oFlashTimer = (DispatcherTimer)sender;
             Grid.Visibility = Visibility.Visible;
+            oFlashTimer.Stop();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -151,7 +153,7 @@ namespace VisualMove
 
         #region Constants
 
-        private const int FLASH_TIMER_INTERVAL = 1;
+        private const int FLASH_TIMER_INTERVAL = 500;
         private const string QRCodeText = "Snap a Box QR Code!";
         private const string GalleryText = "Snap a pic for the Gallery!";
         private string m_sMode = "";

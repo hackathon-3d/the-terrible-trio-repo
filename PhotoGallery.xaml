@@ -36,6 +36,12 @@
                 </DataTemplate>
             </FlipView.ItemTemplate>
         </FlipView>
+        <Image
+            x:Name="EmptyBoxIndicator"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="468"
+            Source="/Assets/ThisBoxIsEmptyWhite.png" />
         <Rectangle
             Grid.Row="0"
             Grid.ColumnSpan="3"

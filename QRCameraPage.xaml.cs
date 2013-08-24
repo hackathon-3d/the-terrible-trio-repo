@@ -108,6 +108,9 @@ namespace VisualMove
             oMediaCapture.Source = oCamera;
             await oMediaCapture.Source.StartPreviewAsync();
 
+            //DrawingCanvas.RenderTransform = oMediaCapture.RenderTransform;
+            //DrawingCanvas.RenderTransformOrigin = oMediaCapture.RenderTransformOrigin;
+
             Result oQR = null;
             while (oQR == null)
             {
@@ -132,29 +135,27 @@ namespace VisualMove
             if (oQR != null)
             {
                 // show message
-                Message = string.Format("Found QR code!", oQR.ToString());
+                Message = String.Empty;
+                QRCodeImage.Visibility = Visibility.Visible;
+                //Message = string.Format("Found QR code!", oQR.ToString());
 
                 // highlight qr area
-                RectangleGeometry oGeometry = new RectangleGeometry();
-                List<ResultPoint> oPoints = new List<ResultPoint>(oQR.ResultPoints);
+                //RectangleGeometry oGeometry = new RectangleGeometry();
+                //List<ResultPoint> oPoints = new List<ResultPoint>(oQR.ResultPoints);
 
-                // generate polygon
-                Polygon oSegment = new Polygon();
-                oSegment.Stroke = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
-                oSegment.Fill = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
-                PointCollection oNewPoints = new PointCollection();
-                foreach (ResultPoint oPoint in oPoints)
-                {
-                    oNewPoints.Add(DrawingCanvas.RenderTransform.TransformPoint(new Point(oPoint.X, oPoint.Y)));
-                }
-                oSegment.Points = oNewPoints;
+                //// generate polygon
+                //Polygon oSegment = new Polygon();
+                //oSegment.Stroke = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
+                //oSegment.Fill = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
+                //PointCollection oNewPoints = new PointCollection();
+                //foreach (ResultPoint oPoint in oPoints)
+                //{
+                //    oNewPoints.Add(DrawingCanvas.RenderTransform.TransformPoint(new Point(oPoint.X, oPoint.Y)));
+                //}
+                //oSegment.Points = oNewPoints;
 
-                // set drawing canvas size
-                //DrawingCanvas.Width = oMediaCapture.Width;
-                //DrawingCanvas.Height = oMediaCapture.Height;
-
-                // add polygon to canvas
-                DrawingCanvas.Children.Add(oSegment);
+                //// add polygon to canvas
+                //DrawingCanvas.Children.Add(oSegment);
 
                 // find box
                 await MoveList.CurrentMove.FindBox(new QRCodeWrapper(oQR.ToString()));
@@ -181,6 +182,7 @@ namespace VisualMove
             Message = WaitingForQR;
             DispatcherTimer oTransitionTimer = (DispatcherTimer)sender;
             oTransitionTimer.Stop();
+            QRCodeImage.Visibility = Visibility.Collapsed;
             this.Frame.Navigate(typeof(PhotoGallery), null);
         }
 
@@ -216,11 +218,10 @@ namespace VisualMove
 
         #region Constants
 
-        private const int TRANSITION_TIMER_INTERVAL = 3;
+        private const int TRANSITION_TIMER_INTERVAL = 2;
         private const string WaitingForQR = "Waiting for QR Code...";
         private const string QRCodeText = "Snap a Box QR Code!";
         private const string GalleryText = "Snap a pic for the Gallery!";
-        private string m_sMode = "";
 
         #endregion
     }
