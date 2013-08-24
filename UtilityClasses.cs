@@ -14,6 +14,18 @@ namespace VisualMove
             Boxes = new Collection<Box>();
         }
 
+        public Box FindBox(QRCodeWrapper QRCode)
+        {
+            foreach(Box oBox in Boxes)
+            {
+                if (oBox.QRCode == QRCode) // This WILL NOT WORK. Need to find a compare method in QR code library that will work
+                {
+                    return oBox;
+                }
+            }
+            return null;
+        }
+
         public Collection<Box> Boxes 
         {
             get;
