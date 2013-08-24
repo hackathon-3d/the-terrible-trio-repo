@@ -45,6 +45,11 @@ namespace VisualMove
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             // Open Window
+            if (CurrentBox.Photos.Count == 0)
+            {
+                Move.Boxes.Remove(CurrentBox);
+                Move.CurrentBox = null;
+            }
             this.Frame.GoBack();
         }
 
