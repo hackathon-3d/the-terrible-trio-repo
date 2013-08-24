@@ -46,8 +46,8 @@
             Grid.ColumnSpan="2">
             <Border Width="720" Opacity="0.75" Height="480" Margin="20" Padding="5" BorderThickness="5" BorderBrush="White" CornerRadius="20" Background="SkyBlue">
                 <ScrollViewer
-                    Width="750"
-                    Height="550"
+                    Width="700"
+                    Height="470"
                     HorizontalScrollBarVisibility="Hidden"
                     VerticalScrollBarVisibility="Visible">
                     <ListView
