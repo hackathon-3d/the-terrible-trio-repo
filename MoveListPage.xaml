@@ -41,16 +41,20 @@
                 Source="/Assets/TrashCanWhite.png" />
         </Button>
         <StackPanel
+            VerticalAlignment="Stretch"
             Grid.Row="1"
             Grid.ColumnSpan="2">
-            <ScrollViewer
-                VerticalAlignment="Stretch"
-                HorizontalScrollBarVisibility="Hidden"
-                VerticalScrollBarVisibility="Visible">
-                <ListView
-                    Height="300"
-                    Name="m_oMoveList" FontSize="48" SelectionChanged="m_oMoveList_SelectionChanged"/>
-            </ScrollViewer>
+            <Border Width="760" Padding="5" BorderThickness="5" BorderBrush="White" CornerRadius="20">
+                <ScrollViewer
+                    Width="750"
+                    Height="570"
+                    HorizontalScrollBarVisibility="Hidden"
+                    VerticalScrollBarVisibility="Auto">
+                    <ListView
+                        Name="m_oMoveList" FontSize="48" SelectionChanged="m_oMoveList_SelectionChanged">
+                    </ListView>
+                </ScrollViewer>
+            </Border>
         </StackPanel>
     </Grid>
 </Page>
