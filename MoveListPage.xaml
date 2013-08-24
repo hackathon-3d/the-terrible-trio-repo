@@ -44,10 +44,10 @@
             VerticalAlignment="Stretch"
             Grid.Row="1"
             Grid.ColumnSpan="2">
-            <Border Width="760" Padding="5" BorderThickness="5" BorderBrush="White" CornerRadius="20" Background="DarkRed">
+            <Border Width="760" Margin="20" Padding="5" BorderThickness="5" BorderBrush="White" CornerRadius="20" Background="DarkRed">
                 <ScrollViewer
                     Width="750"
-                    Height="570"
+                    Height="550"
                     HorizontalScrollBarVisibility="Hidden"
                     VerticalScrollBarVisibility="Visible">
                     <ListView
