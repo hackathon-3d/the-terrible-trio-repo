@@ -56,7 +56,7 @@ namespace VisualMove
 
         }
 
-        public Camera Camera
+        public CameraPage Camera
         {
             get;
             set;
