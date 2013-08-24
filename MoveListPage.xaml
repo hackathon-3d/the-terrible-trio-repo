@@ -56,7 +56,7 @@
                             <DataTemplate>
                                 <Border BorderThickness="2" BorderBrush="White" CornerRadius="5" Width="720">
                                     <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Stretch">
-                                        <TextBlock FontSize="28" Text="This is something here!" HorizontalAlignment="Stretch"></TextBlock>
+                                        <TextBlock FontSize="28" Text="{Binding Path=Name}" HorizontalAlignment="Stretch"></TextBlock>
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
