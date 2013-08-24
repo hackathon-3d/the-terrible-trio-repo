@@ -127,6 +127,11 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Images\CameraIconBlack.png" />
+    <Content Include="Images\CameraIconBlue.png" />
+    <Content Include="Images\CameraIconRed.png" />
+    <Content Include="Images\CameraIconWhite.png" />
+    <Content Include="Images\VisualMoveLogo.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
