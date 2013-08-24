@@ -17,6 +17,10 @@ namespace VisualMove
     /// </summary>
     public sealed partial class PhotoGallery : Page
     {
+        #region Data Members
+        private Dictionary<WriteableBitmap, StorageFile> m_oImageToFileMapping;
+        #endregion
+
         #region Constructors
 
         public PhotoGallery()
@@ -38,9 +42,17 @@ namespace VisualMove
 
         #region Event Handlers
 
-        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        private async void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-            // May want a messagebox here
+            if (m_oImageToFileMapping != null)
+            {
+                foreach (StorageFile oPhoto in m_oImageToFileMapping.Values)
+        {
+                    await oPhoto.DeleteAsync();
+                }
+            }
+
+            m_oFlipView.Items.Clear();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -55,9 +67,18 @@ namespace VisualMove
             this.Frame.Navigate(typeof(PhotoCameraPage), null);
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            // Do something here eventually
+            if (m_oImageToFileMapping != null)
+            {
+                WriteableBitmap oPhoto = m_oFlipView.SelectedItem as WriteableBitmap;
+                if (oPhoto != null)
+                {
+                    await m_oImageToFileMapping[oPhoto].DeleteAsync();
+                    m_oFlipView.Items.Remove(oPhoto);
+                    m_oImageToFileMapping.Remove(oPhoto);
+                }
+            }
         }
 
         #endregion
@@ -88,6 +109,7 @@ namespace VisualMove
 
                         // add photo
                         m_oFlipView.Items.Add(oBitmap);
+                        m_oImageToFileMapping.Add(oBitmap, oPhoto);
                     }
                 }
             }

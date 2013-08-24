@@ -34,6 +34,10 @@ namespace VisualMove
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+
+        //Popup myPopup;
+        //myPopup.Child = new CustomUserControl();
+        //myPopup.IsOpen = true;
       
         private void AddMoveButton_Click(object sender, RoutedEventArgs e)
         {

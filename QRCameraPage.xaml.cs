@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 using Windows.ApplicationModel.Activation;
 using Windows.Devices.Enumeration;
@@ -84,6 +85,7 @@ namespace VisualMove
         #endregion
 
         #region Event Handlers
+
         private async void CameraButton_Click(object sender, RoutedEventArgs e)
         {
             Message = "Looking for QR Code";
@@ -120,15 +122,28 @@ namespace VisualMove
                     await MoveList.CurrentMove.FindBox(new QRCodeWrapper(oQR.ToString()));
                     this.Frame.Navigate(typeof(PhotoGallery), null);
                 }
+
+            // let's refresh the message after a few seconds
+            DispatcherTimer oRefreshTimer = new DispatcherTimer();
+            oRefreshTimer.Tick += oRefreshTimer_Tick;
+            oRefreshTimer.Interval = new TimeSpan(0, 0, REFRESH_TIMER_INTERVAL);
+            oRefreshTimer.Start();
+        }
+
+        void oRefreshTimer_Tick(object sender, object e)
+        {
+            Message = String.Empty;
         }
 
         private void GalleryButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
+
         #endregion
 
         #region Properties
+
         private string Message
         {
             get
@@ -147,37 +162,10 @@ namespace VisualMove
             set;
         }
 
-        // Sets the mode
-        // Mode 1 = "QRCode" = take a QR code pic, examine it to see if it's valid, and go to the gallery if so (showing pics if they exist)
-        // Mode 2 = "Gallery" = you are taking pictures of stuff for the gallery
-        public string Mode
-        {
-            get
-            {
-                return m_sMode;
-            }
-            set
-            {
-                //m_sMode = value;
-                //if (m_sMode == "QRCode")
-                //{
-                //    // Show label that tells user to take a photo of a QR Code
-                //    InfoText.Text = QRCodeText;
-                //    // Hide button to go to gallery
-                //    GalleryButton.Visibility = Visibility.Collapsed;
-                //}
-                //else if(m_sMode == "Gallery")
-                //{
-                //    // Show label that tells user to take a photo of stuff for the gallery
-                //    InfoText.Text = GalleryText;
-                //    // Show button to go to gallery
-                //    GalleryButton.Visibility = Visibility.Visible;
-                //}
-            }
-        }
         #endregion
 
         #region Constants
+        private const int REFRESH_TIMER_INTERVAL = 5;
         private const string QRCodeText = "Snap a Box QR Code!";
         private const string GalleryText = "Snap a pic for the Gallery!";
         private string m_sMode = "";
