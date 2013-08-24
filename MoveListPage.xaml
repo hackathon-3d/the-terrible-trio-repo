@@ -18,16 +18,31 @@
             Grid.Column="1"
             Height="128"
             Source="/Assets/VisualMoveLogoLarge.png" />
-        <Button
-            Name="AddMove"
-            Height="80"
-            Margin="32"
-            Style="{StaticResource ButtonStyle}"
-            HorizontalAlignment="Right"
-            Click="AddMoveButton_Click">
-            <Image
-                Source="/Assets/MovingVanIconWhite.png" />
-        </Button>
+        <StackPanel
+            Grid.Row="0"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right">
+            <Button
+                Name="AddMove"
+                Height="80"
+                Margin="8"
+                Style="{StaticResource ButtonStyle}"
+                HorizontalAlignment="Right"
+                Click="AddMoveButton_Click">
+                <Image
+                    Source="/Assets/MovingVanIconPlus.png" />
+            </Button>
+            <Button
+                Name="Search"
+                Height="90"
+                Margin="8"
+                Style="{StaticResource ButtonStyle}"
+                HorizontalAlignment="Right"
+                Click="SearchButton_Click">
+                <Image
+                    Source="/Assets/MagnifyingGlass.png" />
+            </Button>
+        </StackPanel>
         <Button 
             Grid.Row="0"
             Grid.Column="0"

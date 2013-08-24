@@ -50,13 +50,13 @@
         <Image
             Grid.Row="0"
             Grid.Column="1"
-            Height="96"
-            Source="/Assets/PicturesHeaderWhite.png" />
+            Height="80"
+            Source="/Assets/SearchHeader.png" />
         <Button 
             Grid.Row="0"
             Grid.Column="0"
             Height="80"
-            Margin="32"
+            Margin="8"
             x:Name="BackButton" 
             Style="{StaticResource ButtonStyle}"
             Click="BackButton_Click" >
@@ -67,7 +67,7 @@
             Grid.Row="0"
             Grid.Column="2"
             Height="80"
-            Margin="32"
+            Margin="8"
             x:Name="CameraButton"
             Click="CameraButton_Click" 
             Style="{StaticResource ButtonStyle}">

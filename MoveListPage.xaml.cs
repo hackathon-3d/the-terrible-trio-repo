@@ -75,7 +75,14 @@ namespace VisualMove
             if (MoveList.CurrentMove != null)
             {
                 Frame.Navigate(typeof(QRCameraPage));
-                //Frame.Navigate(typeof(PhotoGalleryMode3));
+            }
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MoveList.CurrentMove != null)
+            {
+                Frame.Navigate(typeof(PhotoGalleryMode3));
             }
         }
     }
