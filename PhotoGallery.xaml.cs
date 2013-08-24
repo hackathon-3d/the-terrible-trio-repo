@@ -37,7 +37,7 @@ namespace VisualMove
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             // Open Window
-            this.Frame.Navigate(typeof(QRCameraPage), null);
+            this.Frame.GoBack();
         }
 
         private void CameraButton_Click(object sender, RoutedEventArgs e)
@@ -48,14 +48,21 @@ namespace VisualMove
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-
+            // Do something here eventually
         }
 
         #endregion
 
+        /*protected async void DisplayMessageBox(string sMessage, string sTitle)
+        {
+            var oMessageDialog = new Windows.UI.Popups.MessageDialog(sMessage, sTitle);
+            oMessageDialog.DefaultCommandIndex = 1;
+            await oMessageDialog.ShowAsync();
+        }*/
+
         #region Properties
 
-        public Box CurrentBox 
+        public Box CurrentBox
         {
             get;
             set;

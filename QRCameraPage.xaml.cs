@@ -81,9 +81,18 @@ namespace VisualMove
         private async void CameraButton_Click(object sender, RoutedEventArgs e)
         {
             Message = "Looking for QR Code";
-
-            
-            Message = string.Format("Found QR code {0}", oQR.ToString());
+            bool bValidImage = true;
+            QRCodeWrapper oQRCodeWrapper = new QRCodeWrapper();
+            if (bValidImage == false)
+            {
+                DisplayMessageBox("Retake QR Code Image", "Invalid QR Code Image!");
+            }
+            else
+            {
+                Move.FindBox(oQRCodeWrapper);
+                this.Frame.Navigate(typeof(PhotoGallery), null);
+                Message = string.Format("Found QR code {0}", oQR.ToString());
+            }
         }
         #endregion
 
