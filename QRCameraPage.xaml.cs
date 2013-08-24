@@ -151,6 +151,7 @@ namespace VisualMove
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             // do nothing
+            this.Frame.GoBack();
         }
 
         #endregion

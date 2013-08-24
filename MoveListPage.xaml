@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="DarkRed">
         <Grid.RowDefinitions>
             <RowDefinition
                 Height="Auto" />
@@ -41,10 +41,16 @@
         <StackPanel
             Grid.Row="1"
             Grid.ColumnSpan="2">
-            <ListView
-                Height="300"
-                Name="m_oMoveList">
-            </ListView>
+            <ScrollViewer
+                VerticalAlignment="Stretch"
+                HorizontalScrollBarVisibility="Hidden"
+                VerticalScrollBarVisibility="Visible">
+                <GridView
+                    Height="300"
+                    Name="m_oMoveList">
+                
+                </GridView>
+            </ScrollViewer>
         </StackPanel>
     </Grid>
 </Page>
