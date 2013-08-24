@@ -16,8 +16,8 @@
         <Image
             Grid.Row="0"
             Grid.Column="1"
-            Height="96"
-            Source="/Assets/VisualMoveLogoSmall.png" />
+            Height="128"
+            Source="/Assets/VisualMoveLogoLarge.png" />
         <Button
             Name="AddMove"
             Height="80"
